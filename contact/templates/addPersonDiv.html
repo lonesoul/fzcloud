@@ -1,0 +1,38 @@
+<div id="addPerson" style="display:none;z-index: 19891023; width: 510px; top: 20.5px; left: 695.5px;" contype="object" showtime="0" times="9" type="page" id="layui-layer9" class="layui-layer layui-anim layui-layer-page layer-ext-moon">
+<div style="cursor: move;" class="layui-layer-title" move="ok">新增人员</div>
+<div class="layui-layer-content">
+<div style="display: block;" class="popup addPerson layui-layer-wrap">
+    <div class="newBranch">
+    	<ul class="listItem">
+        	<li class="first">
+                <p class="tit"><span class="red">* </span>姓名：</p>
+                <p class="con">
+                    <input type="text" class="inputMode w390" onfocus="clearAlaMsg_new('#name')" onblur="onblurName()" id="name"></p>
+                <p id="name_er" class="tips" style="display: none;"></p>
+                <p></p>
+                <p class="tips" id="nameTip">不为空，只支持中文、数字、大小写字母、英文下划线“_”及中划线“-”，且不能超过32字符</p></li>
+			<li>
+                <p class="tit">
+                    <span class="red">* </span>手机号：</p>
+                <p class="con">
+                    <input type="text" class="inputMode w390" onfocus="clearAlaMsg_new('#phone')" onblur="onblurPhone()" id="phone">
+                </p>
+                <p id="phone_er" class="tips" style="display: none;"></p>
+                <p></p>
+                <p class="tips" id="phoneTip">手机号不能为空</p>
+            </li>
+        	<li>
+                <p class="tit"><span class="red">* </span>邮箱：</p>
+                <p class="con">
+                    <input type="text" class="inputMode w390" onfocus="clearAlaMsg_new('#email')" onblur="onblurEmail()" id="email"></p>
+                <p id="email_er" class="tips" style="display: none;"></p>
+                <p></p>
+                <p class="tips" id="emailTip">邮箱不能为空</p>
+            </li>
+		</ul>
+	</div>
+</div>
+</div>
+<span class="layui-layer-setwin">
+<a href="javascript:;" class="layui-layer-ico layui-layer-close layui-layer-close1">
+</a></span><div class="layui-layer-btn"><a class="layui-layer-btn0">确定</a><a class="layui-layer-btn1">取消</a></div></div>

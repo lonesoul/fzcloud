@@ -1,0 +1,81 @@
+{%  extends "base.html" %}
+
+{%block indexTit%}
+    <h2>
+        <i class="titIcon"> </i>
+        {{indextitcon}}
+    </h2>
+    <p>
+        管理监控报警通知的接收人电话、邮箱
+    </p>    
+{%endblock%}
+{% block mainCon %}
+<div class="innerCon">
+    <div class="conBox">
+        <div class="innerBox">
+            <div id="con-contact-2" class="buildCon hide" style="display: block;">
+			   <div class="buildBox grayBg">
+				<div class="whiteBox">
+					<div class="btnDiv">
+					<a id="refreshGroup" class="refresh" href="javascript:void(0);"><i class="i17"></i></a><a id="showCreateGroup" class="greenBtn" href="javascript:void(0);">创&emsp;建</a>
+					   </div>
+					   <!-- 表头 -->
+					<table class="listTable groupList">
+						<colgroup>
+							<col width="25%">
+							<col width="25%">
+							<col width="25%">
+							<col width="25%">
+						   </colgroup>
+						<thead>
+							<tr class="tcenter">
+								<th>组名</th>
+								<th>成员数</th>
+								<th>最新更新时间</th>
+								<th>操作</th>
+							   </tr>
+						   </thead>
+					   </table>
+
+				   <div id="grouplist">
+				   <table id="listGroup" class="listTable">
+                        <colgroup>
+                            <col width="25%">
+                            <col width="25%">
+                            <col width="25%">
+                            <col width="25%">
+                        </colgroup>
+                        <tbody id="contactsList">
+                            <tr id="listTrGroup" class="trGray">
+                                <td class="hide">
+                                <i name="aaa" id="1ef2d2fc-edf3-4ed2-a154-5d4266378644" class="check"></i>
+                                <input type="check" class="hide"></td>
+                                <td><a href="/contactgroup/detail?contactsId=1ef2d2fc-edf3-4ed2-a154-5d4266378644&amp;adminPin=&amp;dataCenter=hb&amp;t=1470308505716" class="blueLink">aaa</a>
+                                </td>
+                                <td>1</td>
+                                <td>2016-08-04 18:08:50</td>
+                                <td><i onclick="list.deleteGroupCon('1ef2d2fc-edf3-4ed2-a154-5d4266378644','','aaa')" title="删除" class="i16"></i></td>
+                            </tr>
+                        </tbody>
+				   </table>
+					</div>
+				   </div>
+			   </div>
+			<!-- 分页begin -->
+			   <div id="conPagination" class="pages">
+			   </div>
+			   <!-- 分页end -->
+		   </div>
+  
+        </div>
+
+    </div>
+
+    <div id="publicPagination" class="pages"> </div>
+</div>
+
+<div style="display:none;z-index:19891014; background-color:#000; opacity:0.3; filter:alpha(opacity=30);" times="1" id="layui-layer-shade1" class="layui-layer-shade"></div>
+</div>
+{% include "newGroupDiv.html"%}
+{% include "addContactDiv.html"%}
+{% endblock %}

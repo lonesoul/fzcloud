@@ -1,0 +1,12 @@
+/*==========home=================*/
+.product-list{width:100%;border-radius:2px;height:auto;}
+.user-profile{height:120px;background:#ddd;padding-top:10px;padding-left:20px;border-radius:5px 5px 0 0;}
+.list-title{height:40px;line-height:40px;padding-left:20px;font-size:20px;background:#F8F8F8;border-bottom:1px solid #35B47E;}
+.row{border-radius:20px;}
+.product-item{float:left;width:44.89%;height:50px;background:#F9F9F9;padding:25px 25px 20px 25px;}
+.item-profile{float:left;}
+.item-recode{float:right;}
+.item-recode-num-count{font-size:25px;color:#1C6043;}
+
+
+

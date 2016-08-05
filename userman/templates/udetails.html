@@ -1,0 +1,64 @@
+{%  extends "base.html" %}
+{%block indexTit%}
+
+ <h2 class="fl">
+ <i class="titIcon"></i><a id="goBackContainer" href="javascript:void(0);">{{indextitcon}}</a></i>
+ </h2>
+{%endblock%}
+{% block mainCon %}
+<div class="innerCon">
+ <div class="infoBox">
+    <h4>基本信息</h4>
+        <ul class="cl">
+            <li>I  D：8a53fa41-b3d4-4c5d-935b-ebe6b526b26b</li>
+            <li>用户名：lonesoul</li>
+            <li>姓   名：<span id="name">lonesoul</span><span id="editName" class="hide">
+                <input type="text" id="inputName" class="inputName"><a id="modifyNameDetail" href="javascript:void(0);" class="sureBtn">确定</a></span><i id="modifyName" title="编辑" class="i32"></i>
+            </li>
+            <li>权限：</li>
+            <li>Email：<span id="conTime">2016-06-24 10:52:01</span></li>
+            <li>手机号：12345678911</li>
+            <li>状态</li>
+            <li>所在用户组</li>
+            <li>添加日期：</li>
+            <li>最后登录：</li>
+      </ul>
+ </div>
+ <div class="infoBox">
+      <h4>配置</h4>
+      <ul id="configureInfo" class="cl"><li>镜像：<nobr id="conImage">centos6.5_x86_64</nobr></li><li>CPU：<nobr id="CPUNum">1</nobr>核</li><li>内   存： <nobr id="memoryNum">1</nobr>GB</li><li>系统盘：30GB</li></ul>
+ </div>
+ <div class="infoBox">
+      <h4>绑定资源</h4>
+      <ul id="resourceInfo" class="cl">
+          <li>内网地址：192.168.1.3 / 默认子网</li><li class="long">公 网 IP：<span id="showBindPublicIps">-</span></li>
+          <li class="hide" id="ccDefend">CC防护：<i id="defend" class="switch"></i></li>
+          <li class="hide" id="httpReq">每秒http请求数：<span id="httpNumPerSecond"></span>个 <i id="edit1" title="编辑" class="i32"></i></li>
+          <li class="hide" id="connectReq">每秒新建连接数：<span id="connectNumPerSecond"></span>个 <i id="edit2" title="编辑" class="i32"></i></li>
+      </ul>
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- 主内容区end -->
+    </div>
+{% endblock %}

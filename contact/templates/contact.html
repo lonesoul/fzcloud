@@ -1,0 +1,156 @@
+{%  extends "base.html" %}
+
+{%block indexTit%}
+    <h2>
+        <i class="titIcon"> </i>
+        {{indextitcon}}
+    </h2>
+    <p>
+        管理监控报警通知的接收人电话、邮箱
+    </p>    
+{%endblock%}
+{% block mainCon %}
+<div class="innerCon">
+    <div class="conBox">
+        <div class="innerBox">
+            <div id="con-contact-1" class="buildCon">
+
+                <div class="buildBox grayBg">
+                	<div class="whiteBox">
+                    	<div class="btnDiv">
+                    	<!--
+                        	<div class="searchBox">
+                            	<input type="text" class="searchInput" placeholder="请输名称进行搜索" ><a href="javascript:void(0);" class="searchBtn"><i class="i31"></i></a>
+                            </div>
+                            -->
+                        	<a class="refresh" id="refresh" href="javascript:void(0);"><i class="i17"></i></a>
+                       		<a id="batch" class="whiteBtn mr5 " href="javascript:void(0);">批量操作</a>
+                        	<a id="showCreate" class="greenBtn" href="javascript:void(0);">创&emsp;建</a>
+                        </div>
+                        <!-- 表头 -->
+
+                    	<table class="listTable">
+                        	<colgroup>
+                            	<col width="4%" class="batch hide" style="display: none;">
+                            	<col width="19%">
+                            	<col width="19%">
+                            	<col width="20%">
+                            	<col width="19%">
+                                <col>
+                            </colgroup>
+                        	<thead>
+                            	<tr class="tcenter trGray">
+                                	<th id="selectAll2" class="batch hide" style="display: none;"><i class="check"></i><input type="checkbox" class="hide"></th>
+                                	<th>姓名</th>
+                                	<th>手机号</th>
+                                	<th>邮箱</th>
+                                	<th>最新更新时间</th>
+                                	<th>操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                    <div id="list">
+                    <table id="listTableList" class="listTable">
+                        <colgroup>
+                            <col width="4%" class="batch hide" style="display: none;">
+                            <col width="19%">
+                            <col width="19%">
+                            <col width="20%">
+                            <col width="19%">
+                            <col>
+                        </colgroup>
+                    	<tbody id="recordList"><tr _name="lonesoul" _id="47f6e6c6-6834-45e1-bb10-4f143850f412" id="listTr" class=""><td class="batch" style="display: none;"><i name="lonesoul" id="47f6e6c6-6834-45e1-bb10-4f143850f412" class="check"></i><input type="check" class="hide"></td><td>lonesoul</td><td>18916696385</td><td title="448765461@qq.com">448765461@qq.co...</td><td>2016-06-23 16:37:42</td><td><i id="updatePerson" _email="448765461@qq.com" _phone="18916696385" _name="lonesoul" _id="47f6e6c6-6834-45e1-bb10-4f143850f412" title="默认联系人不允许修改" class="i47 i147"></i><i _name="lonesoul" _id="47f6e6c6-6834-45e1-bb10-4f143850f412" title="删除" onclick="showDeleteTip('默认联系人不允许删除！')" class="i16"></i></td></tr><tr _name="shengyuan" _id="922d1fdf-9e7c-4b88-838c-c9dcbf177fb2" id="listTr" class="trGray"><td class="batch" style="display: none;"><i name="shengyuan" id="922d1fdf-9e7c-4b88-838c-c9dcbf177fb2" class="check"></i><input type="check" class="hide"></td><td>shengyuan</td><td>18916696328</td><td title="4487654444@qq.com">4487654444@qq.c...</td><td>2016-08-04 18:07:53</td><td><i id="updatePerson" _email="4487654444@qq.com" _phone="18916696328" _name="shengyuan" _id="922d1fdf-9e7c-4b88-838c-c9dcbf177fb2" title="修改" class="i47"></i><i id="deletePerson" _name="shengyuan" _id="922d1fdf-9e7c-4b88-838c-c9dcbf177fb2" title="删除" class="i16"></i></td></tr></tbody>
+                    </table>
+                     </div>
+                    </div>
+                    <div class="botDiv hide" style="display: none;">
+                    	<span id="selectAll" class="checkDiv"><i class="check"></i></span><a id="deleteAll" title="请选择要删除的联系人" class="wsBtn gsBtn mr5 grayBtn" href="javascript:void(0);">删&ensp;除</a>
+                    </div>
+                </div>
+            	<!-- 分页begin -->
+                <div id="conPagination" class="pages" _size="10" _min="0" _max="0" _cur="0" style="display: none;"><a _page="0" href="javascript:;" class="prev" id="prev">上一页</a><span class="current" _page="0" href="javascript:;" id="num">1</span><span class="current" _page="0" href="javascript:;" id="num">1</span><a _page="0" href="javascript:;" class="next" id="next">下一页</a></div>
+                <!-- 分页end -->
+            </div>
+        </div>
+        <div class="botDiv" style="display:none">
+            <span class="checkDiv">
+                <i id="selectAll" class="check"> </i>
+            </span>
+            <a id="delete" class="wsBtn mr5 gsBtn grayBtn" title="请选择资源"
+            href="#">
+                删 除
+            </a>
+            <a>
+                启 动
+            </a>
+            <a>
+                停 止
+            </a>
+            <a>
+                重 启
+            </a>
+        </div>
+    </div>
+
+    <div id="publicPagination" class="pages"> </div>
+</div>
+{% include "addPersonDiv.html"%}
+{% include "newGroupDiv.html"%}
+{% include "addContactDiv.html"%}
+</div>
+<script>
+    $(function(){
+        $("#showCreate").click(function(){
+            $("body").append('<div style="display:;z-index:19891014; background-color:#000; opacity:0.3; filter:alpha(opacity=30);" times="1" id="layui-layer-shade1" class="layui-layer-shade"></div>');
+            $("#addPerson").show();
+            
+        });
+        $(".layui-layer-btn1").click(function(){
+            $("#addPerson").hide();
+            $("#layui-layer-shade1").remove();
+        });
+        $(".layui-layer-btn0").click(function(){
+            var name = $("#name").val();
+            var phone = $("#phone").val();
+            var email = $("#email").val();
+            if(name==""){
+                //$("#msg").remove();
+                //$(".home-logo").after('<div id="msg"><div class="msgcon">请输入您的用户名</div></div>');
+                //$("#ym").focus();
+                return false;
+            }
+            if(phone==""){
+                
+                $("#phone_er").show()
+                return false;		
+            }	
+            $.ajax({
+                type: "POST",
+                url: "/account/?action=login",
+                dataType: "text",
+                data: {"user":user,"pass":pass},
+                beforeSend: function(){
+                    //$('<div id="msg" />').addClass("loading").html("正在登录...").css("color","#999").appendTo('.sub');
+                    //$("#yz").css("display","none");
+                    $('<div id="loading" />').html("<div class=\"load\">正在登录...<\/div>").appendTo('body');
+                },			
+                success: function(data){
+                    if(data=='0'){
+                        $("#msg").remove();
+                        $(".home-logo").after('<div id="msg"><div class="msgcon">您输入的用户名或密码错误</div></div>');
+                    }
+                    if(data=='1'){
+                        if (LoginType=='1'){
+                            window.location.href='/beian';
+                        }else{
+                        
+                            window.location.href='/shj1/home';
+                        }
+                    }
+                }
+            });
+        });
+    })
+</script>
+{% endblock %}

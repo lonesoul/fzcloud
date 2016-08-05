@@ -1,0 +1,99 @@
+{% extends "home.html" %}
+
+{% block content %}
+	<div class="toolbar">
+		<div class="title">{{ContentTitle}}</div>
+		<a class="btn" href="#" id="Create">
+			<span class="fa icon_newech"></span>
+			<span class="text">创建Access Key</span>
+		</a>
+	</div>
+	<div class="pane">
+
+		<table class="table table-bordered table-hover" >
+			<thead>
+				<tr>
+					<th>Access Key ID</th>
+					<th>Access Key Secret</th>
+					<th>状态</th>
+					<th>应用于</th>
+					<th>创建时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for AccessInfo in AccessList%}
+				<tr>
+					<td>{{AccessInfo.KeyID}}</td>
+					<td>{{AccessInfo.KeySecret}}</td>
+					<td class="active">
+						{% if AccessInfo.AccessStatus == 0%}
+							<span class="icon-status icon-inactive"></span> &nbsp;暂停
+						{%else%}
+							<span class="icon-status icon-active"></span> &nbsp;活跃
+						{%endif%}
+
+					</td>
+					<td>{{AccessInfo.KeyUseType}}</td>
+					<td>{{AccessInfo.CreateTime|date:'Y-m-d H:i:s'}}</td>
+					<td>
+						{%if AccessInfo.AccessStatus == 0%}
+							启用
+						{%else%}
+							禁用
+						{%endif%}
+					</td>
+				</tr>
+				{%endfor%}
+			</tbody>
+		</table>
+<script>
+	$(function(){
+		$(".btn").click(function(){
+			var overlay = '<div class="window-overlay">';
+			overlay += '<div class="modal" style="width:600px;height:auto;top:50%;">';
+			overlay += '	<div class="modal-header" style="cursor:move;">';
+			overlay += '		<h4>';
+			overlay += '			新建Access Key';
+			overlay += '			<a href="#" class="close">';
+			overlay += '				<span class="icon-close icon-Large">';
+			overlay += '				</span>';
+			overlay += '			</a>';
+			overlay += '		</h4>';
+			overlay += '	</div>';
+			overlay += '	<div class="modal-content">';
+			overlay += '		<form class="form form-horizontal">';
+			overlay += '			<div class="item">';
+			overlay += '				<div class="controls">';
+			overlay += '					Access Key ID和Access Key Secret是您访问 NCloud API的密钥，具有该账户完全的权限，请您妥善保管。';
+			overlay += '				</div>';
+			overlay += '			</div>';
+			overlay += '			<div class="form-actions">';
+			overlay += '				<input class="btn btn-primary" type="button" value="同意并创建" />';
+			overlay += '				<input class="btn btn-cancel close" type="button" value="取消" />';
+			overlay += '			</div>';
+			overlay += '		</form>';
+			overlay += '	</div>';
+			overlay += '</div>';
+			overlay += '<script>$(function(){$(".close").click(function(){$(".window-overlay").remove();});';	
+			overlay += '$(".btn-primary").click(function(){';
+			overlay += '	var LBName = $("#LBName").val();';
+			overlay += '	var LBType = $("#LBType").val();';
+			overlay += '	var eip = $("#eip").val();';
+			overlay += '	var eips = $("#eip option:selected").text();';
+			overlay += '	if(LBName==""){alert("请输入名称");return false;}';			
+			overlay += '	if(eip=="0"){return false;}';
+			overlay += '	var params = {"action":"CreateAccess"};';
+			overlay += '	var ParamsToStr = JSON.stringify(params);';
+			overlay += '	$.post("/api/", { method: "GET", "action":"access",params: ParamsToStr},';
+			overlay += '		function(data){if(JSON.parse(data).code==0){location.reload();}else{alert("当前的区域没有足够地址了，请联系客服。")}});';
+			overlay += '});';
+			overlay += '	})<\/script>';
+			overlay += '</div>';
+			$(".pane").after(overlay);
+		})
+	})
+</script>
+
+	</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{%block indexTit%}
+    <h2>
+        <i class="titIcon"></i>
+        {{indextitcon}}
+    </h2>
+{%endblock%}
+{% block mainCon %}
+<h3 class="serviceTit">
+    资源&服务
+    <span class="enTit">
+        Resources & Services
+    </span>
+</h3>
+<div class="servList">
+    <ul id="resourcesList" class="cl">
+        <li>
+            <a class="box">
+                <p>
+                    云主机
+                </p>
+                <div class="circleBox">
+                    <div id="charts_server">
+                        <svg hegiht="116" version="1.1" width="116"
+                        xmlns="http://www.w3.org/2000/sag" style="overflow:hidden;position:relative;"></svg>
+                    </div>
+                    <div class="text">
+                        <span class="green">0</span>
+                    </div>
+                </div>
+                <div class="num">
+                    <span class="green">0</span>
+                    /
+                    <span class="red">20</span>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
+
+{% endblock %}

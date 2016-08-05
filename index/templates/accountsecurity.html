@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% block toolbar %}
+	<div class="toolbar">
+		<div class="title">{{ContentTitle}}</div>
+	</div>
+{% endblock %}
+{% block overview-main %}
+<div class="details-tab" style="display:;">
+	<ul class="tabs">
+		<li class="current e-current">
+			<a class="tab-item" href="#securityset" data-tab="securityset">
+				<span class="fa fa-monitor"></span>
+				安全设置
+			</a>		
+		</li>
+		<li class="current">
+			<a class="tab-item" id="editpass" href="#editpasswd" data-tab="editpasswd">
+				<span class="fa fa-monitor"></span>
+				修改密码
+			</a>
+		</li>
+		<li class="current">
+			<a class="tab-item" href="#loginnotes" data-tab="loginnotes">
+				<span class="fa fa-snapshots"></span>
+				登陆记录
+			</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+	
+	
+		<div class="description securityset security-center">
+			<ul>
+				<li>
+					<div class="title">登录密码</div>
+					<div class="operation">
+						<span class="fa fa-lock"></span>&nbsp; 已启用 &nbsp; | &nbsp;
+						<a href="#editpasswd" id="editpasswd" data-permalink="">修改</a>
+					</div>
+					<div class="description">建议使用混合大、小写字母、符号及数字的高强度密码，并定期修改密码，以保护账户安全。</div>
+
+				</li>
+				<li class="session">
+					<div class="title">禁用会话保持</div>
+					<div class="operation">
+						<a href="#" data-operation="enable">启用</a>
+					</div>
+					<div class="description">启用之后，系统不记录登录状态，当用户上一次操作完成退出浏览器后，需要重新登录。</div></li>
+			</ul>
+		</div>	
+	
+	
+		<div class="editpasswd" style="display:none;">
+				<div class="base">
+					<div class="modal-content" id="">
+						<form class="form form-horizontal">
+							<div class="item">
+								<div class="control-label">当前密码</div>
+								<div class="controls">
+									<input type="password" id="currentpasswd"/>
+									<span class="currenthelp inline"></span>
+								</div>
+							</div>
+							<div class="item">
+								<div class="control-label">新密码</div>
+								<div class="controls">
+									<input type="password" id="newpasswd"/>
+									<span class="newhelp inline"></span>
+								</div>
+							</div>	
+							<div class="form-actions">
+								<input class="btn btn-primary editpassword" type="button" value="提交" />
+								<input class="btn btn-cancel close" type="button" value="取消" />
+							</div>
+						</form>
+					 </div>
+				</div>
+		</div>
+		<div class="loginnotes" style="display:none;margin:20px;">
+
+			<div class="page-inner">
+				<p class="alert alert-info">登录历史保留至多最近100次登录 NCloud 的记录</p>
+				<div class="pagination"></div>
+				<table class="table table-hover table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>登录时间</th>
+							<th>登录IP</th>
+							<th>登录平台</th>
+							<th>登录设备</th>
+						</tr>
+					</thead>
+					<tbody>
+						{%for LoginHistroy in LoginHistroyList%}
+						<tr>
+							<td>{{LoginHistroy.LoginTime|date:"Y-m-d H:i:s"}}</td>
+							<td class="login-ip">{{LoginHistroy.LoginIp}}</td>
+							<td>{{LoginHistroy.LoginPlatform}}</td>
+							<td>{{LoginHistroy.LoginDevice}}</td>
+						</tr>
+						{%endfor%}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block tips %}
+
+{% endblock %}
+{% block window %}
+
+<script type="text/javascript">
+$(function(){
+		$(".tab-item").click(function(){
+		var EchDataType=$(this).attr('data-tab');
+		if(EchDataType=='securityset'){
+			$(".tabs li").removeClass("e-current");
+			$(this).parent().addClass("e-current");
+			$(".securityset").show();
+			$(".editpasswd").hide();
+			$(".loginnotes").hide();
+
+		}
+		if(EchDataType=='editpasswd'){
+			$(".tabs li").removeClass("e-current");
+			$(this).parent().addClass("e-current");
+			$(".securityset").hide();
+			$(".editpasswd").show();
+			$(".loginnotes").hide();			
+		}
+		if(EchDataType=='loginnotes'){
+			$(".tabs li").removeClass("e-current");
+			$(this).parent().addClass("e-current");
+			$(".loginnotes").show();
+			$(".securityset").hide();
+			$(".editpasswd").hide();
+		}
+	});
+	$("#editpasswd").click(function(){
+			$(".tabs li").removeClass("e-current");
+			$("#editpass").parent().addClass("e-current");
+			$(".securityset").hide();
+			$(".editpasswd").show();
+			$(".loginnotes").hide();	
+
+	});
+
+	$(".editpassword").click(function(){
+		var currentpasswd = $("#currentpasswd").val();
+		var newpasswd = $("#newpasswd").val();
+		if (currentpasswd == ''){
+			$(".currenthelp").html('请输入当前密码');
+			return false;
+		}else{
+
+			$(".currenthelp").html('');
+		}
+		if (newpasswd == ''){
+			$(".newhelp").html('请输入新密码');
+			return false;
+		}else{
+			$(".currenthelp").html('');
+		}
+		if (newpasswd.length < 6 || newpasswd.length > 16){
+			$(".newhelp").html('密码长度不能少于6位或大于16位');
+			return false;
+		}else{
+			$(".newhelp").html('');
+		}
+		if (!(/^.*?[\d]+.*$/.test(newpasswd) && /^.*?[A-Za-z].*$/.test(newpasswd) && /^.{6,16}$/.test(newpasswd))) {
+		        $(".newhelp").html('密码必须包含字母和数字');
+		        return false;
+		}else{
+			$(".inline").html('');
+		}
+		var params = {"action":"ChangePassword","currentpasswd":currentpasswd,"newpasswd":newpasswd}
+		var ParamsToStr = JSON.stringify(params);
+		$.post("/api/", { method: "GET", params: ParamsToStr}, 
+			function (data){
+				alert(JSON.parse(data)['msg']);
+				$("#currentpasswd").val('');
+				$("#newpasswd").val('');
+		},"JSON");
+	})
+
+})
+
+</script>
+{% endblock %}

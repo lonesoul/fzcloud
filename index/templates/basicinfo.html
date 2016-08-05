@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block toolbar %}
+	<div class="toolbar">
+		<div class="title">{{ContentTitle}}</div>
+	</div>
+{% endblock %}
+{% block overview-main %}
+<div class="details-tab" style="display:;">
+	<ul class="tabs">
+		<li class="current e-current">
+			<a class="tab-item" href="#baseinfo" data-tab="baseinfo">
+				<span class="fa fa-monitor"></span>
+				基本信息
+			</a>		
+		</li>
+		<li class="current">
+			<a class="tab-item" href="#editmobile" data-tab="editmobile">
+				<span class="fa fa-monitor"></span>
+				修改手机
+			</a>
+		</li>
+		<li class="current">
+			<a class="tab-item" href="#editemail" data-tab="editemail">
+				<span class="fa fa-snapshots"></span>
+				修改通知邮箱
+			</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+	
+	
+		<div class="description baseinfo">
+
+				<div class="base">
+					<div class="modal-content" id="">
+						<form class="form form-horizontal">
+							<div class="item">
+								<div class="control-label">邮箱</div>
+								<div class="controls">
+									<input type="text" id="UserAccount" value="{{UserAccount}}" readonly="readonly" disabled="disabled" />
+								</div>
+							</div>
+							<div class="item">
+								<div class="control-label">用户</div>
+								<div class="controls">
+									<input type="text" id="UserName" value="{{UserName}}" />
+								</div>
+							</div>
+							<div class="item">
+								<div class="control-label">头像</div>
+								<div class="controls">
+									<input type="file" id="headimg" value="" />
+									<span class="help">
+										<img src="/static/images/head/TB1KlQRHpXXXXcCXFXXrywt4VXX-120-120.png" width="120" height="120">
+									</span>
+								</div>
+
+							</div>
+							<div class="form-actions">
+								<input class="btn btn-primary" type="button" value="提交" />
+								<input class="btn btn-cancel close" type="button" value="取消" />
+							</div>
+						</form>
+					 </div>
+				</div>
+		</div>	
+	
+	
+		<div class="editmobile" style="display:none;">
+
+		</div>
+		<div class="editemail" style="display:none;margin:20px;">
+
+				<div class="base">
+					<div class="modal-content" id="">
+						<form class="form form-horizontal">
+							<div class="item">
+								<div class="control-label">通知邮箱</div>
+								<div class="controls">
+									<input type="text" id="noticeemail" value="{{UserAccount}}" readonly="readonly" disabled="disabled" />
+								</div>
+							</div>
+							<div class="form-actions">
+								<input class="btn btn-primary" type="button" value="提交" />
+								<input class="btn btn-cancel close" type="button" value="取消" />
+							</div>
+						</form>
+					 </div>
+				</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block tips %}
+
+{% endblock %}
+{% block window %}
+
+<script type="text/javascript">
+$(function(){
+		$(".tab-item").click(function(){
+		var EchDataType=$(this).attr('data-tab');
+		if(EchDataType=='baseinfo'){
+			$(".tabs li").removeClass("e-current");
+			$(this).parent().addClass("e-current");
+			$(".baseinfo").show();
+			$(".editmobile").hide();
+			$(".editemail").hide();
+
+		}
+		if(EchDataType=='editmobile'){
+			$(".tabs li").removeClass("e-current");
+			$(this).parent().addClass("e-current");
+			$(".baseinfo").hide();
+			$(".editmobile").show();
+			$(".editemail").hide();			
+		}
+		if(EchDataType=='editemail'){
+			$(".tabs li").removeClass("e-current");
+			$(this).parent().addClass("e-current");
+			$(".editemail").show();
+			$(".baseinfo").hide();
+			$(".editmobile").hide();
+		}
+		
+	})
+})
+</script>
+{% endblock %}

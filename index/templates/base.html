@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>财富方舟 FZCloud 控制台</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="财富方舟 FZCloud 控制台 云计算 基础设施 弹性计算 软件定义网络 sdn elastic cloud computing iaas devops console">
+    <meta name="description" content="云之基石，自由计算。财富方舟 FZCloud 控制台为您提供按需分配、弹性可伸缩的计算能力。">
+    <link rel="stylesheet" href="/static/css/font-awesome.css">
+
+    <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.png">
+    <link type="image/png" href="/static/images/favicon.png" rel="apple-touch-icon">
+    <script type="text/javascript" src="/static/js/Chart.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-1.4.2.min.js"></script>
+    <link rel="stylesheet" href="/static/css/control0803.css">
+    <link rel="stylesheet" href="http://inf.jcloud.com/js/layer/skin/layer.css" id="layui_layer_skinlayercss" style="">
+    <link rel="stylesheet" href="http://inf.jcloud.com/js/layer/skin/moon/style.css" id="layui_layer_skinmoonstylecss" style="">
+    <script>
+        $(function(){
+            {%ifequal type 'webservice'%}
+            $("#left_menu1").addClass("current");
+            {%endifequal%}
+            {%ifequal type 'database'%}
+            $("#left_menu1").addClass("current");
+            {%endifequal%}
+            {%ifequal type 'caches'%}
+            $("#left_menu1").addClass("current");
+            {%endifequal%}
+            {%ifequal type 'nosql'%}
+            $("#left_menu1").addClass("current");
+            {%endifequal%}
+            {%ifequal type 'information'%}
+            $("#left_menu1").addClass("current");
+            {%endifequal%}
+            {%ifequal type 'lbs'%}
+            $("#left_menu1").addClass("current");
+            {%endifequal%}
+            
+            {%ifequal type 'asset'%}
+            $("#left_menu2").addClass("current");
+            {%endifequal%}
+            {%ifequal type 'assetgroup'%}
+            $("#left_menu2").addClass("current");
+            {%endifequal%}
+            
+            {%ifequal type 'lineuser'%}
+            $("#left_menu3").addClass("current");
+            {%endifequal%}
+            {%ifequal type 'loginhistory'%}
+            $("#left_menu3").addClass("current");
+            {%endifequal%}
+            {%ifequal type 'commandrecord'%}
+            $("#left_menu3").addClass("current");
+            {%endifequal%}
+            {%ifequal type 'updown'%}
+            $("#left_menu3").addClass("current");
+            {%endifequal%}            
+            
+            {%ifequal type 'user'%}
+            $("#left_menu4").addClass("current");
+            {%endifequal%}
+            {%ifequal type 'usergroup'%}
+            $("#left_menu4").addClass("current");
+            {%endifequal%}
+            
+            
+            {%ifequal type 'contact'%}
+            $("#left_menu7").addClass("current");
+            {%endifequal%}
+            {%ifequal type 'contactgroup'%}
+            $("#left_menu7").addClass("current");
+            {%endifequal%}
+        })
+    </script>
+    <script type="text/javascript" src="/static/js/gz_control.js"></script>
+</head>
+<body>
+    
+    {% include "header.html" %}
+    <section class="content">
+        {% include "leftMenu.html" %}
+        <div class="rightCon">
+            <div class="subMenu">
+                <ul id="menu1">
+                    <li>
+                        <a id="webservice" {%ifequal type "webservice"%}class="cur"{%endifequal%} href="/webservice/">
+                            WEB 服务
+                        </a>
+                    </li>
+                    <li>
+                        <a id="database" {%ifequal type "database"%}class="cur"{%endifequal%} href="/database/">
+                            数据库
+                        </a>
+                    </li>
+                    <li>
+                        <a id="caches" {%ifequal type "caches"%}class="cur"{%endifequal%} href="/caches/">
+                            缓存
+                        </a>
+                    </li>
+                    <li>
+                        <a id="nosql" {%ifequal type "nosql"%}class="cur"{%endifequal%} href="/nosql/">
+                            NoSQL
+                        </a>
+                    </li>
+                    <li>
+                        <a id="information" {%ifequal type "information"%}class="cur"{%endifequal%} href="/information/">
+                            消息队列
+                        </a>
+                    </li>
+                    <li>
+                        <a id="lbs" {%ifequal type "lbs"%}class="cur"{%endifequal%} href="/lbs/">
+                            负载均衡
+                        </a>
+                    </li>
+                </ul>
+                <ul id="menu2">
+                    <li>
+                        <a id="asset" {%ifequal type "asset"%}class="cur"{%endifequal%} href="/asset/">
+                            资   产
+                        </a>
+                    </li>
+                    <li>
+                        <a id="assetgroup" {%ifequal type "assetgroup"%}class="cur"{%endifequal%} href="/assetgroup/">
+                            资产组
+                        </a>
+                    </li>
+                </ul>
+                <ul id="menu3">
+                    <li>
+                        <a id="lineuser" {%ifequal type "lineuser"%}class="cur"{%endifequal%} href="/lineuser/">
+                            在线用户
+                        </a>
+                    </li>
+                    <li>
+                        <a id="loginhistory" {%ifequal type "loginhistory"%}class="cur"{%endifequal%} href="/loginhistory/">
+                            登录历史
+                        </a>
+                    </li>
+                    <li>
+                        <a id="commandrecord"  {%ifequal type "commandrecord"%}class="cur"{%endifequal%} href="/commandrecord/">
+                            命令记录
+                        </a>
+                    </li>
+                    <li id="showCache">
+                        <a id="updown" {%ifequal type "updown"%}class="cur"{%endifequal%} href="/updown/">
+                            上传下载
+                        </a>
+                    </li>
+                </ul>
+                <ul id="menu4">
+                    <li>
+                        <a id="user" {%ifequal type "user"%}class="cur"{%endifequal%} href="/user/">
+                            用   户
+                        </a> 
+                    </li>
+                    <li>
+                        <a  id="usergroup" {%ifequal type "usergroup"%}class="cur"{%endifequal%} href="/usergroup/">
+                            用户组
+                        </a>
+                    </li>
+                </ul> 
+
+                <ul id="menu5">
+                    <li>
+                        <a id="hostmonitor" {%ifequal type "hostmonitor"%}class="cur"{%endifequal%} href="/hostmonitor/">
+                            主机监控
+                        </a>
+                    </li>
+                    <li>
+                        <a id="httpmonitor" {%ifequal type "httpmonitor"%}class="cur"{%endifequal%} href="/httpmonitor/">
+                            站点监控
+                        </a>
+                    </li>
+                    <li>
+                        <a id="interfacemonitor" {%ifequal type "interfacemonitor"%}class="cur"{%endifequal%} href="/interfacemonitor/">
+                            第三方接口
+                        </a>
+                    </li>
+                </ul>
+                <ul id="menu6">
+                    <li>
+                        <a id="interfacemonitor" {%ifequal type "interfacemonitor"%}class="cur"{%endifequal%} href="/interfacemonitor/">
+                            测试环境
+                        </a>
+                    </li>
+                    <li>
+                        <a id="interfacemonitor" {%ifequal type "interfacemonitor"%}class="cur"{%endifequal%} href="/interfacemonitor/">
+                            生产环境
+                        </a>
+                    </li>
+                </ul>
+                <ul id="menu7">
+                    <li>
+                        <a id="contact" {%ifequal type "contact"%}class="cur"{%endifequal%} href="/contact/">
+                            联系人
+                        </a>
+                    </li>
+                    <li>
+                        <a id="contactgroup" {%ifequal type "contactgroup"%}class="cur"{%endifequal%} href="/contactgroup/">
+                            联系人组
+                        </a>
+                    </li>
+                </ul>
+                <div id="menu_button" class="pushIcon"> </div>
+            </div>
+            <div class="mainCon">
+                <div class="indexTit">
+                    {% block indexTit %}{% endblock %}
+                </div>
+                {% block mainCon %}{% endblock %}
+            </div>
+            
+            {% block creationstep %}{% endblock %}
+        </div>
+
+
+    </section>
+    <!--
+    <div style="z-index:19891014; background-color:#000; opacity:0.3; filter:alpha(opacity=30);" times="1" id="layui-layer-shade1" class="layui-layer-shade"></div>
+    <div style="z-index:19891018; background-color:#000; opacity:0.3; filter:alpha(opacity=30);" times="5" id="layui-layer-shade5" class="layui-layer-shade"></div>
+    
+    <div style="display:none;" class="popup contactUs">
+        <div class="addDiv">
+            <ul class="listItem">
+                <li class="first"><p class="tit">联系电话：</p>
+                    <p class="con">400 615 1212</p>
+                </li>
+                <li><p class="tit">邮&emsp;箱：</p>
+                    <p class="con">jcloud@jd.com</p>
+                </li>
+                <li><p class="tit">服务号：</p>
+                    <div class="con">
+                        <img src="http://inf.jcloud.com/images/erweima.jpg"><br>
+                        <p class="pl20">京云部落</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="showTips" style="display: none;" class="textTip textTips layui-layer-wrap">
+        <dl>
+            <dt id="textTipsTitle">&nbsp;</dt>
+            <dd id="textTipsContent">无法删除云主机，仅停止/错误状态云主机可以删除</dd>
+        </dl>
+    
+    </div>
+    <div style="display:none;z-index: 19891017; width: 460px; top: 76.5px; left: 729px;" contype="object" showtime="0" times="3" type="page" id="layui-layer3" class="layui-layer layui-anim layui-layer-page layer-ext-moon"><div style="cursor: move;" class="layui-layer-title" move="ok">提示</div><div class="layui-layer-content"><div id="showTips" style="display: block;" class="textTip textTips layui-layer-wrap">
+    <dl>
+        <dt id="textTipsTitle">&nbsp;</dt>
+        <dd id="textTipsContent">无法删除云主机，仅停止/错误状态云主机可以删除</dd>
+    </dl>
+</div></div><span class="layui-layer-setwin"><a href="javascript:;" class="layui-layer-ico layui-layer-close layui-layer-close1"></a></span><div class="layui-layer-btn"><a class="layui-layer-btn0">确定</a></div></div>
+
+    <div id="showTips1" style="display:none;" class="textTip1">
+        <dl>
+            <dt id="textTipsTitle1">&nbsp;</dt>
+            <dd id="textTipsContent1">
+             </dd>
+        </dl>
+    </div>
+    <div style="display:none;z-index:19891016; background-color:#000; opacity:0.3; filter:alpha(opacity=30);" times="3" id="layui-layer-shade3" class="layui-layer-shade"></div>
+    -->
+</body>
+</html>

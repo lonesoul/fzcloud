@@ -1,0 +1,44 @@
+@charset "utf-8"; 
+*{margin:0;padding:0;list-style-type:none;}
+html,body{background-attachment:scroll;background-clip:border-box;background:-color:#f1f4f6;background-image:none;background-origin:padding-box;background-position:0 0;background-repeat:repeat;background-size:auto auto;height:100%;overflow:auto;}
+body{color:#333;font-size:12px;line-height:16px;font-family:"微软雅黑"; }
+.bodylogin{width:100%;height:100%;background-size:cover;position:fixed;}
+.container{height:100%;margin:auto;width:100%;background-size:cover}
+.page-home{background-attachment:scroll;background-clip:border-box;background-image:radial-gradient(ellipse at center center,#353644 0px,#202029 100%);background-origin:padding-box;background-position:0 0;background-repeat:repeat;background-size:auto auto;height:100%;overflow:hidden;width:100%;position:relative;}
+.page-home .wrapper{width:450px;margin:100px auto;}
+.page-home .wrapperr{width:450px;}
+.home-logo {background-image: url("/static/images/logo.png");background-position: center center;background-repeat: no-repeat;background-size: 240px auto;height: 80px;margin-bottom: 10px;}
+.page-home .form-wrapper{background:#fff;border-radius:5px;padding:30px 30px 30px 20px;}
+
+.loginmain{margin:0 auto;padding-top:200px;position:fixed;width:100%;height:100%;}
+.login{width:400px;margin:0 auto;border-radius:5px;background:#FCFAFF;padding:10px 0 20px 0;filter:alpha(opacity=80);  /* ie 有效*/	
+-moz-opacity:0.8; /* Firefox  有效*/	
+opacity: 0.8; /* 通用，其他浏览器  有效*/}
+.login-tilte{border-top:1px solid #ddd;padding-top:5px;height:50px;margin:0px 0 15px 0;width:100%;line-height:50px;font-size:20px;font-weight:600;}
+.logincon{height:35px;margin-bottom:20px;line-height:35px;}
+.logincon label{width:70px;display:block;float:left;padding-right:10px;text-align:left;padding-left:20px;}
+.logincon input{margin:0 auto;display:block;border:2px solid #cbcad8;border-radius:2px;height:35px;margin-top:5px;padding:2px 0 2px 5px;width:280px;}
+.logincon a{display:block;text-align:right;margin-left:20px;float:right;color:#0072C6;}
+#login,#reg{border:none;width:288px;height:45px;line-height:45px;text-align:center;font-size:16px;font-weight:600;cursor:pointer;background:#57b382;background-bottom:#4ba575;color:#fff;}
+#lgoin:hover,#reg:hover{background:#4FAE7B;}
+.tiaokuan{margin-right:100px;width:200px;;height:40px;display:block;}
+.home-footer{padding:10px;color:#666;}
+.home-footer a{color:#777;}
+.page{font-size:14px;color:#3b3b3b;clear:both;overflow:hidden;min-height:500px;width:100%;}
+.page-inner{padding-bottom:50px;margin:0 auto;padding-left:0px;width:1024px;pading-right:0px;padding-top:50px;}
+#browsers{margin:100px auto;width:800px;}
+#browsers h1{text-align:center;font-size:26px;line-height:40px;margin:8px 0px;}
+#browsers ul{padding:0px;margin:40px 0px;}
+#browsers ul li{padding:0px;list-style-type:none;width:200px;float:left;margin:0px;}
+#browsers ul li a{display:block;height:80px;color:#57b382;text-decoration:none;}
+#browsers ul li a span.icon{width:;display:block;height:90px;background:url(/static/images/browsers.png) no-repeat;}
+#browsers ul li a span.firefox{background-position:0px -189px;}
+#browsers ul li a span.safari{background-position:-475px -189px;}
+#browsers ul li a span.ie{background-position:0px -281px;}
+#msg,#errmsg{position:fixed;
+filter:alpha(opacity=50);  /* ie 有效*/	
+-moz-opacity:0.5; /* Firefox  有效*/	
+opacity: 0.5; /* 通用，其他浏览器  有效*/
+}
+.msgcon{position:fixed;margin:0 auto;width:300px;height:100%;background:;text-align:center;height:40px;line-height:40px;color:#000;font-size:20px;font-weight:bold;position: relative;margin:10px 0 0 70px;}
+.c{clear:both;}

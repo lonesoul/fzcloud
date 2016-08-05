@@ -1,0 +1,91 @@
+{%  extends "base.html" %}
+
+{%block indexTit%}
+    <h2>
+        <i class="titIcon"> </i>
+        {{indextitcon}}
+    </h2>
+    <p>
+        管理监控报警通知的接收人电话、邮箱
+    </p>    
+{%endblock%}
+{% block mainCon %}
+<div class="innerCon">
+
+        <div class="infoBox">
+            <h4>基本信息</h4>
+            <ul class="cl">
+                <li class="hide">I  D：<span id="contactId">1ef2d2fc-edf3-4ed2-a154-5d4266378644</span></li>
+                <li class="lwr-li-word-break">联系组名称：<span id="groupName">aaa</span></li>
+                <li>成员数：<span id="number">1</span></li>
+                <li>最新更新时间：2016/08/04 18:08:50</li>
+                 <input type="hidden" value="1ef2d2fc-edf3-4ed2-a154-5d4266378644" id="mid">
+                  <input type="hidden" _id="1ef2d2fc-edf3-4ed2-a154-5d4266378644" id="id">
+            </ul>
+        </div>
+
+        <div class="buildTab">
+                           <ul>
+                              <li class="hover"><p>成员信息</p></li>
+                           </ul>
+                          </div>
+
+            <div id="publicPagination" class="pages"> </div>
+        </div>
+        <div class="buildCon">
+                              <div class="buildBox">
+                        <dl class="detail-alerm">
+                            <dd class="fr"><a class="glBtn" onclick="addDetailPerson('1ef2d2fc-edf3-4ed2-a154-5d4266378644')" href="javascript:void(0)">新&emsp;增</a></dd>
+                        </dl>
+                        <div class="alermCon">
+                        	<div style="border-left:0;" class="alermBox mb23">
+                        	<div id="listContact">
+                            <table class="alermTable" id="contactList">
+                                <colgroup>
+                                    <col width="20%">
+                                    <col width="20%">
+                                    <col width="25%">
+                                    <col width="20%">
+                                    <col width="15%">
+                                </colgroup>
+                                <thead>
+                                    <tr class="trGray">
+                                        <th class="tcenter">姓名</th>
+                                        <th class="tcenter">联系电话</th>
+                                        <th class="tcenter">邮箱</th>
+                                        <th class="tcenter">最新更新时间</th>
+                                        <th class="tcenter">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recordList">
+                                    <!--<tr id="msgTr" class=""><td colspan="5" style="text-align: center;">没有联系人</td></tr>-->
+                                    <tr _id="47f6e6c6-6834-45e1-bb10-4f143850f412" class="">
+                                        <td>lonesoul</td>
+                                        <td>18916696385</td>
+                                        <td>448765461@qq.com</td>
+                                        <td>2016-06-23 16:37:42</td>
+                                        <td><i onclick="detail.deleteGroupCon('47f6e6c6-6834-45e1-bb10-4f143850f412','','lonesoul')" title="删除" class="i16"></i></td>
+                                    </tr>
+                                    <tr _id="922d1fdf-9e7c-4b88-838c-c9dcbf177fb2" class="trGray">
+                                        <td>shengyuan</td>
+                                        <td>18916696328</td>
+                                        <td>4487654444@qq.com</td>
+                                        <td>2016-08-04 18:07:53</td>
+                                        <td><i onclick="detail.deleteGroupCon('922d1fdf-9e7c-4b88-838c-c9dcbf177fb2','','shengyuan')" title="删除" class="i16"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                            </div>
+                    	</div>
+                                </div>
+
+
+
+                <!-- 联系人 end -->
+        </div>
+        
+<div style="display:none;z-index:19891014; background-color:#000; opacity:0.3; filter:alpha(opacity=30);" times="1" id="layui-layer-shade1" class="layui-layer-shade"></div>
+</div>
+{% include "addContactDiv.html"%}
+{% endblock %}

@@ -1,0 +1,34 @@
+<div id="newGroup" style="display:none;z-index: 19891015; width: 600px; top: 139px; left: 659px;" contype="object" showtime="0" times="1" type="page" id="layui-layer1" class="layui-layer layui-anim layui-layer-page layer-ext-moon"><div style="cursor: move;" class="layui-layer-title" move="ok">新建联系组</div><div class="layui-layer-content"><div style="" class="popup newGroup layui-layer-wrap">
+	<div class="newBranch scrollDiv">
+        <ul class="listItem">
+            <li class="first">
+                <p class="tit"><span class="red">* </span>名称：</p>
+                <p class="con"><input type="text" class="inputMode w430" onfocus="clearAlaMsg_new('#grourName')" onblur="onblurgrourName()" id="grourName"></p><p id="grourName_er" class="tips" style="display: none;"></p><p></p>
+            <p class="tips" id="grourNameTip">不为空，只支持中文、数字、大小写字母、英文下划线“_”及中划线“-”，且不能超过32字符</p></li>
+            <li>
+                <p class="tit">联系人：</p>
+                <div class="con">
+                    <table class="popTable">
+                        <colgroup>
+                            <col width="">
+                            <col width="">
+                            <col width="">
+                            <col width="">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>姓名</th>
+                                <th>手机号</th>
+                                <th>邮箱</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="createAddPerson">
+                        </tbody>
+                    </table>
+                    <div><a id="addCreate" class="blueLink" href="javascript:void(0);"><i class="i45"></i>添加联系人</a></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div></div><span class="layui-layer-setwin"><a href="javascript:;" class="layui-layer-ico layui-layer-close layui-layer-close1"></a></span><div class="layui-layer-btn"><a class="layui-layer-btn0">确定</a><a class="layui-layer-btn1">取消</a></div></div>

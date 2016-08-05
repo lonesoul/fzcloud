@@ -1,0 +1,164 @@
+{%  extends "base.html" %}
+
+{%block indexTit%}
+    <h2>
+        <i class="titIcon"> </i>
+        {{indextitcon}}
+    </h2>
+    <p>
+        您可以根据自己的需求自定义云主机的CPU，内存配置，加载或卸载云硬盘，并通过页面访问登陆
+    </p>    
+{%endblock%}
+{% block mainCon %}
+<div class="innerCon">
+    <div class="conBox">
+        <div class="innerBox">
+            <div class="btnDiv">
+                <div class="searchBox hide"></div>
+                <a id="refresh" class="refresh" href="#">
+                    <i class="i17"> </i>
+                </a>
+                <a id="batch" class="whiteBtn mr5" href="">
+                批量操作
+                </a>
+                <a id="create" class="greenBtn" href="/{{data_center}}/instance/creation">
+                    创 建
+                </a>
+            <div>
+            <table class="listTable">
+                <colgroup>
+                    <col width="4%" class="batch" style="display: none;">
+                    <col width="14%">
+                            <col width="14%">
+                            <col width="11%">
+                            <col width="11%">
+                            <col width="8%">
+                            <col width="8%">
+                            <col width="8%">
+                            <col width="8%">
+                            <col width="13%">
+                        </colgroup>
+                <thead>
+                    <tr class="trGray">
+                        <th class="batch" style="display:none">
+                            <i id="selectA112" class="check"> </i>
+                            <input class="hide" type="checkbox" />
+                        </th>
+                        <th>
+                            名称
+                        </th>
+                        <th>
+                            镜像
+                        </th>
+                        <th>
+                            内网地址
+                        </th>
+                        <th>
+                            公网IP
+                        </th>
+                        <th>
+                            <div class="filter">
+                                状态
+                                <i class="arr"> </i>
+                                <ul class="filterDrop">
+                                    <li id="conShowAll">全 部</li>
+                                    <li id="conShowActive">运 行</li>
+                                    <li id="conShowStop">停 止</li>
+                                    <li id="conShowError">错 误</li>
+                                </ul>
+                            </div>
+                        </th>
+                        <th>
+                            CPU
+                        </th>
+                        <th>
+                            内存
+                        </th>
+                        <th>
+                            计费类型
+                        </th>
+                        <th>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+            <div id="list">
+                <table class="listTable">
+                <colgroup>
+                               <col width="4%" class="batch" style="display: none;">
+                               <col width="14%">
+                               <col width="14%">
+                               <col width="11%">
+                               <col width="11%">
+                               <col width="8%">
+                               <col width="8%">
+                               <col width="8%">
+                               <col width="8%">
+                               <col width="13%">
+                           </colgroup>
+                    <tbody>
+                    
+                        <tr id="recordList" class="" style="display:none"> 
+                            <td colspan="8">无云主机数据</td>
+                        </tr>
+                        <tr class="" id="listTr" _uuid="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b"><td style="display: none;" class="batch hide"><i _cmem="1024" _vcpu="1" _publicip="-" _state="-" _status="1" _name="lonesoul" _uid="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" _id="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" id="chosen" class="check hide"></i><input type="check" class="hide"></td><td><a href="/gz/instance/details?id=8a53fa41-b3d4-4c5d-935b-ebe6b526b26b&amp;adminPin=&amp;dataCenter=hb&amp;t=1466736697442" title="lonesoul" id="containerName" class="serverName">lonesoul</a><i _val="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" title="VNC" id="vtdvId_gz" class="i18 i118"></i></td><td title="centos6.5_x86_64" id="listImageName">centos6.5_x86_64</td><td id="privateIp">-</td><td id="publicIp">-</td>
+                            <td>
+                                <!--
+                                <span _state="-" _status="1" class="green" id="status">
+                                    <span class="red">
+                                    <i class="redPoint"></i>
+                                    创建中
+                                    </span>
+                                </span>
+                                span _state="6" _status="3" class="green" id="status"><span class="yellow"><i class="redPoint"></i>停止</span></span>
+                                -->
+                                <span _state="-" _status="2" class="green" id="status">
+                                    <span class="green">
+                                    <i class="greenPoint"></i>
+                                    运行
+                                    </span>
+                                </span>
+                            </td>
+                            <td _uid="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" _id="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" id="cpuProgress"><span class="progress"><i style="width:0%;" class="blueIn"></i></span> 0%</td>
+                            <td _uid="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" _id="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" id="memoryProgress"><span class="progress"><i style="width:7%;" class="blueIn"></i></span> 7%</td>
+                            <td _type="按配置" _uid="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" _id="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" id="containerPriceType">按配置</td>
+                            <td><i title="启动" id="startButton" class="i11" style="display: none;"></i><i title="停止" id="stopButton" class="i12"></i><i title="重启" id="restartButton" class="i13"></i><i id="backupIcon" title="备份" style="display: none" class="backupIcon"></i><i title="制作镜像" id="createImage" class="i14 creat-jx"></i><i title="绑定公网IP" id="bindPublicIp" class="i15"></i><i title="删除" id="deleteButton" class="i16"></i></td>
+                            <!--
+                            
+                            <td _uid="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" _id="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" id="cpuProgress">-</td>
+                            <td _uid="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" _id="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" id="memoryProgress">-</td>
+                            <td _type="" _uid="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" _id="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" id="containerPriceType">-</td>
+                            
+                            <td><i title="启动" id="startButton" class="i11 i111"></i><i title="停止" id="stopButton" class="i12" style="display: none;"></i><i title="仅运行状态的云主机可以重启" id="restartButton" class="i13 i113"></i><i id="backupIcon" title="镜像资源限额已满，无法备份" style="display: none" class="backupIconUn"></i><i title="镜像资源限额已满，无法制作镜像" id="createImage" class="i14 creat-jx i114"></i><i title="绑定公网IP" id="bindPublicIp" class="i15 i115"></i><i title="删除" id="deleteButton" class="i16"></i></td></tr>
+                            -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="botDiv" style="display:none">
+            <span class="checkDiv">
+                <i id="selectAll" class="check"> </i>
+            </span>
+            <a id="delete" class="wsBtn mr5 gsBtn grayBtn" title="请选择资源"
+            href="#">
+                删 除
+            </a>
+            <a>
+                启 动
+            </a>
+            <a>
+                停 止
+            </a>
+            <a>
+                重 启
+            </a>
+        </div>
+    </div>
+
+    <div id="publicPagination" class="pages"> </div>
+</div>
+{% include "stopServerDiv.html"%}
+{% include "restartServerDiv.html"%}
+</div>
+{% endblock %}
