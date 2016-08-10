@@ -14,12 +14,14 @@ import random
 import os
 import time
 import shutil
+from decorator.response import validate_login_status
 
+@validate_login_status
 def index(request):
     indextitcon = "概览"
-    
+    UserName = request.session.get("UserName")
     #return render_to_response('index.html',{"indextitcon":indextitcon,"data_center":data_center})
     return render_to_response('index.html',locals())
-    
+
     
     #http://inf.jcloud.com/css/jcloud_new/gz_images/stepArrow.jpg

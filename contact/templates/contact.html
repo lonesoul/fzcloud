@@ -60,7 +60,27 @@
                             <col width="19%">
                             <col>
                         </colgroup>
-                    	<tbody id="recordList"><tr _name="lonesoul" _id="47f6e6c6-6834-45e1-bb10-4f143850f412" id="listTr" class=""><td class="batch" style="display: none;"><i name="lonesoul" id="47f6e6c6-6834-45e1-bb10-4f143850f412" class="check"></i><input type="check" class="hide"></td><td>lonesoul</td><td>18916696385</td><td title="448765461@qq.com">448765461@qq.co...</td><td>2016-06-23 16:37:42</td><td><i id="updatePerson" _email="448765461@qq.com" _phone="18916696385" _name="lonesoul" _id="47f6e6c6-6834-45e1-bb10-4f143850f412" title="默认联系人不允许修改" class="i47 i147"></i><i _name="lonesoul" _id="47f6e6c6-6834-45e1-bb10-4f143850f412" title="删除" onclick="showDeleteTip('默认联系人不允许删除！')" class="i16"></i></td></tr><tr _name="shengyuan" _id="922d1fdf-9e7c-4b88-838c-c9dcbf177fb2" id="listTr" class="trGray"><td class="batch" style="display: none;"><i name="shengyuan" id="922d1fdf-9e7c-4b88-838c-c9dcbf177fb2" class="check"></i><input type="check" class="hide"></td><td>shengyuan</td><td>18916696328</td><td title="4487654444@qq.com">4487654444@qq.c...</td><td>2016-08-04 18:07:53</td><td><i id="updatePerson" _email="4487654444@qq.com" _phone="18916696328" _name="shengyuan" _id="922d1fdf-9e7c-4b88-838c-c9dcbf177fb2" title="修改" class="i47"></i><i id="deletePerson" _name="shengyuan" _id="922d1fdf-9e7c-4b88-838c-c9dcbf177fb2" title="删除" class="i16"></i></td></tr></tbody>
+                    	<tbody id="recordList">
+                            {% for contacts in contact_list%}
+                                
+                            <tr _name="{{contacts.Name}}" _id="{{contacts.uuid}}" id="listTr" class="">
+                                <td class="batch" style="display: none;">
+                                <i name="lonesoul" id="{{contacts.uuid}}" class="check">
+                                </i><input type="check" class="hide">
+                                </td>
+                                <td>{{contacts.Name}}</td>
+                                <td>{{contacts.Phone}}</td>
+                                <td title="448765461@qq.com">{%if contacts.Email|length > 15 %}{{contacts.Email|slice:"15"}}...{%else%}{{contacts.Email}}{%endif%}</td>
+                                <td>{{contacts.CreateTime|date:"Y-m-d H:i:s"}}</td>
+                                <td>    
+                                    <i id="updatePerson" _email="{{contacts.Email}}" _phone="{{contacts.Phone}}" _name="{{contacts.Name}}" _id="{{contacts.uuid}}" title="修改" class="i47 updatePerson"></i>
+                                    <i id="deletePerson" _name="{{contacts.Name}}" _id="{{contacts.uuid}}" title="删除" class="i16 deletePerson"></i>
+                                    <!--<i id="updatePerson" _email="{{contacts.Email}}" _phone="{{contacts.Phone}}" _name="{{contacts.Name}}" _id="{{contacts.uuid}}" title="默认联系人不允许修改" class="i47 i147"></i>-->
+                                    <!--<i _name="{{contacts.Name}}" _id="{{contacts.uuid}}" title="删除" onclick="showDeleteTip('默认联系人不允许删除！')" class="i16"></i>-->
+                                </td>
+                            </tr>
+                            {% endfor %} 
+                        </tbody>
                     </table>
                      </div>
                     </div>
@@ -98,55 +118,133 @@
 {% include "addPersonDiv.html"%}
 {% include "newGroupDiv.html"%}
 {% include "addContactDiv.html"%}
+{% include "updatePersonDiv.html"%}
+{% include "deleteTipsDiv.html"%}
 </div>
 <script>
+    function clearAlaMsg_new(divid){
+        $(divid+"_er").parent().removeClass("error");
+        $(divid+"_er").show()
+        $(divid+"_er").html("");
+        $(divid+"Tip").show();
+    }
+    
     $(function(){
+    
+        $("#recordList tr").hover(function(){
+            $("#recordList tr").removeClass("trHover");
+            $(this).addClass("trHover");
+        });
+        $(".updatePerson").click(function(){
+            $("body").append('<div style="display:;z-index:19891014; background-color:#000; opacity:0.3; filter:alpha(opacity=30);" times="1" id="layui-layer-shade1" class="layui-layer-shade"></div>');
+            $("#updatePersonDiv").show();
+            $("#updatePersonDiv #nowId").html($(this).attr("_id"));
+            $("#updatePersonDiv #uname").val($(this).attr("_name"));
+            $("#updatePersonDiv #uphone").val($(this).attr("_phone"));
+            $("#updatePersonDiv #uemail").val($(this).attr("_email"));
+        })
+        $(".deletePerson").click(function(){
+            $("body").append('<div style="display:;z-index:19891014; background-color:#000; opacity:0.3; filter:alpha(opacity=30);" times="1" id="layui-layer-shade1" class="layui-layer-shade"></div>');
+            $("#deleteTipsDiv").show();
+            $("#delete_contacts_div").html("确认删除联系人："+$(this).attr("_name")+" ？");
+            $("#deleteTipsDiv #cid").html($(this).attr("_id"));
+        })
         $("#showCreate").click(function(){
             $("body").append('<div style="display:;z-index:19891014; background-color:#000; opacity:0.3; filter:alpha(opacity=30);" times="1" id="layui-layer-shade1" class="layui-layer-shade"></div>');
             $("#addPerson").show();
+        });
+        $(".layui-layer-btn1,.layui-layer-close1").click(function(){
+            $("#updatePersonDiv").hide();
+            $("#addPerson").hide();
+            $("#addPerson").hide();
+            $("#deleteTipsDiv").hide();
+            $("#layui-layer-shade1").remove();
             
         });
-        $(".layui-layer-btn1").click(function(){
-            $("#addPerson").hide();
-            $("#layui-layer-shade1").remove();
-        });
         $(".layui-layer-btn0").click(function(){
-            var name = $("#name").val();
-            var phone = $("#phone").val();
-            var email = $("#email").val();
-            if(name==""){
-                //$("#msg").remove();
-                //$(".home-logo").after('<div id="msg"><div class="msgcon">请输入您的用户名</div></div>');
-                //$("#ym").focus();
-                return false;
+            
+            if($("#addPerson").css("display") == 'block'){
+                var name = $("#name").val();
+                var phone = $("#phone").val();
+                var email = $("#email").val();
+                var params = {"action":"addPerson","name":name,"phone":phone,"email":email,}
+                var add_up = 1;
             }
-            if(phone==""){
+            if($("#deleteTipsDiv").css("display") == 'block'){
+                    var cid = $("#cid").html();
+                    var params = {"action":"deletePerson","cid":cid,}
+            }
+            if($("#updatePersonDiv").css("display") == 'block'){
+                var nowId = $("#nowId").html();
+                var name = $("#uname").val();
+                var phone = $("#uphone").val();
+                var email = $("#uemail").val();
+                var params = {"action":"updatePerson","name":name,"phone":phone,"email":email,"nowId":nowId,}
+                var add_up = 1;
+            }
+            if (add_up ==1){
+                if(name==""){
+                    $("#nameTip").hide();
+                    $("#name_er").parent().addClass("error");
+                    $("#name_er").show()
+                    $("#name_er").html("名称不能为空");
+                    var input_status = 0;
+                }
+                //不为空，只支持中文、数字、大小写字母、英文下划线“_”及中划线“-”
+                if(phone==""){
+                    $("#phoneTip,#uphoneTip").hide();
+                    $("#phone_er,#uphone_er").parent().addClass("error");
+                    $("#phone_er,#uphone_er").show()
+                    $("#phone_er,#uphone_er").html("手机号不能为空");
+                    
+                    var input_status = 0;	
+                }
+                //请输入合法手机号
+                if (!phone.match(/^((13|15|17|18)+\d{9})$/)) {
+                    $("#phoneTip,#uphoneTip").hide();
+                    $("#phone_er,#uphone_er").parent().addClass("error");
+                    $("#phone_er,#uphone_er").show()
+                    $("#phone_er,#uphone_er").html("请输入合法手机号");
+                    var input_status = 0;	
+                } 
                 
-                $("#phone_er").show()
-                return false;		
-            }	
+                if(email==""){
+                    $("#emailTip,#uemailTip").hide();
+                    $("#email_er,#uemail_er").parent().addClass("error");
+                    $("#email_er,#uemail_er").show()
+                    $("#email_er,#uemail_er").html("邮箱不能为空");
+                    var input_status = 0;	
+                }
+                //请输入合法邮箱
+                if (!email.match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)) {
+                    $("#emailTip,#uemailTip").hide();
+                    $("#email_er,#uemail_er").parent().addClass("error");
+                    $("#email_er,#uemail_er").show()
+                    $("#email_er,#uemail_er").html("请输入合法邮箱");
+                    var input_status = 0;	
+                } 
+                if (input_status == 0){
+                    return false;
+                }
+            }
+			var ParamsToStr = JSON.stringify(params);
             $.ajax({
                 type: "POST",
-                url: "/account/?action=login",
-                dataType: "text",
-                data: {"user":user,"pass":pass},
+                url: "/api/",
+                dataType: "json",
+                data: { method: "GET", 'action':'contact',params: ParamsToStr},
                 beforeSend: function(){
                     //$('<div id="msg" />').addClass("loading").html("正在登录...").css("color","#999").appendTo('.sub');
                     //$("#yz").css("display","none");
-                    $('<div id="loading" />').html("<div class=\"load\">正在登录...<\/div>").appendTo('body');
+                    //$('<div id="loading" />').html("<div class=\"load\">正在登录...<\/div>").appendTo('body');
                 },			
                 success: function(data){
-                    if(data=='0'){
-                        $("#msg").remove();
-                        $(".home-logo").after('<div id="msg"><div class="msgcon">您输入的用户名或密码错误</div></div>');
-                    }
-                    if(data=='1'){
-                        if (LoginType=='1'){
-                            window.location.href='/beian';
-                        }else{
-                        
-                            window.location.href='/shj1/home';
-                        }
+                    if(data['code']==0){
+                         window.location.href=".";
+                        //$("#msg").remove();
+                        //$(".home-logo").after('<div id="msg"><div class="msgcon">您输入的用户名或密码错误</div></div>');
+                    }else{
+                        alert(data['msg']);
                     }
                 }
             });

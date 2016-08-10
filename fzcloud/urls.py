@@ -19,7 +19,12 @@ from django.contrib import admin
 urlpatterns = [
     #url(r'^admin/', admin.site.urls),
     #url(r'^([^/]+)/index/$','index.views.index'),
-    url(r'^index/','index.views.index'),
+    url(r'^$','account.views.login'),
+    url(r'^login/$','account.views.login'),
+    url(r'^logout/$','account.views.logout'),
+    
+    url(r'^index/$','index.views.index'),
+    url(r'^index','index.views.index'),
     url(r'^webservice/$','microservice.views.webservice'),
     url(r'^database/$','microservice.views.database'),
     url(r'^caches/$','microservice.views.caches'),
@@ -35,7 +40,8 @@ urlpatterns = [
     url(r'^usergroup/$','userman.views.usergroup'),
     url(r'^contact/$','contact.views.contact'),
     url(r'^contactgroup/$','contact.views.contactgroup'),
-    url(r'^contactgroup/([^/]+)$','contact.views.cgdetails'),   
+    url(r'^contactgroup/([^/]+)$','contact.views.cgdetails'),
+    url(r'^api/$','api.views.index'),
 
 ]
 

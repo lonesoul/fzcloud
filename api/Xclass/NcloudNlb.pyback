@@ -1,0 +1,210 @@
+# coding=utf-8
+
+#导出常用模块
+import datetime,json,md5,sys,os,time
+#导出数据结构模块
+from api.models import *
+
+from lib import NcloudNlbLib
+from api.ManagerEch import *
+#导入hashlib模块
+import hashlib
+#操作HandleNlb类
+class HandleNlb:
+
+	def __init__(self, Data,params):
+		self.params = params
+		self.Data = Data
+	def CreateLB(self):
+		#计算LbId
+		LbId = NcloudNlbLib.GetLbId()
+		eipgroup = EipInfo.objects.get(id=self.params['eip'])
+		eipgroup.AssignType = 1
+		eipgroup.AssignId = LbId
+		EipId = eipgroup.EipId
+		EipGroup = eipgroup.EipGroup
+		#如果用户类型等于3，则直接插入数据
+		if self.Data['UserType'] != 3:
+			#查询Lvsinfo表
+			#查询当前区域有无购买公网ip 有继续 无结束
+			Lvs_List = LvsInfo.objects.filter(LvsZone=self.Data['Zone'])
+			
+			if Lvs_List:
+				print '存在'
+				LVSHandles = []
+				LVSStatus = 0
+				for LvsDetails in Lvs_List:
+					LvsHandleInfo = {
+						'id' : str(LvsDetails['id']),
+						'LvsWeight' : LvsDetails['LvsWeight'],
+						'LvsIp' : LvsDetails['LvsIp'],
+						'GroupId' : LvsDetails['GroupId'],
+					}
+					LVOperateOut = Operate(LvsDetails['LvsIp'],{'action':'LVSStatus'})
+					LVSStatus = int(LVOperateOut)
+					VrrpNum = LvsDetails['VrrpNum']
+					LVSHandles.append(LvsHandleInfo)
+				if 0 == 0:
+					#LVS群存活
+					#判断公网IP类型 1：双线
+					if EipGroup == 1:
+						#双线IP
+						#获取VID和Rid
+						#根据VrrpNum 计算ViD和Rid 当前值 T+1 U+2 更新VrrpNum+2
+						TVrrpNum = VrrpNum + 1
+						UVrrpNum = VrrpNum + 2
+						KVrrpNum = VrrpNum + 2
+						Tip = self.params['eips'].split(',')[0]
+						Uip = self.params['eips'].split(',')[1]
+						parame = {
+							'TVrrpNum' : TVrrpNum,
+							'UVrrpNum' : UVrrpNum,
+							'Tip' : Tip,
+							'Uip' : Uip,
+						}
+					#获取KEEPLIVED配置文件
+					LvsCfg = NcloudNlbLib.GetDoubletLvsCfg(parame)
+					for LVSHandle in LVSHandles:
+						if LVSHandle['LvsWeight'] == 1:
+							operateinfo = {
+								'action':'CreateLVS',
+								'parame' : {
+									'Keepalived' : LvsCfg['keepalivedM'],
+									'LBroute' : LvsCfg['LBroute'],
+									'FileLvsName' : self.params['eips'],
+									'Eips' : [Tip,Uip],
+								}
+							}
+							LvsId = LVSHandle['id']
+							LvsGroupId = LVSHandle['GroupId']
+						else:
+							operateinfo = {
+								'action':'CreateLVS',
+								'parame' : {
+									'Keepalived' : LvsCfg['keepalivedB'],
+									'LBroute' : LvsCfg['LBroute'],
+									'FileLvsName' : self.params['eips'],
+									'Eips' : [Tip,Uip],
+								}
+							}
+						print operateinfo
+						LVSOperateOut = Operate(LVSHandle['LvsIp'],operateinfo)
+						print LVSOperateOut
+						if LVSOperateOut == 'done':
+							CreateLvsStatus = 1
+						else:
+							CreateLvsStatus = 0
+					
+					if CreateLvsStatus == 1:
+						#更新LVS相对主备
+						for LvsDetails in Lvs_List:
+							if LvsDetails['LvsWeight'] == 1:
+								LvsDetails.LvsWeight = 2
+							else:
+								LvsDetails.LvsWeight = 1
+							LvsDetails.VrrpNum = KVrrpNum
+							
+							LvsDetails.save()
+						inLb = LbInfo(LbId=LbId,LbName=self.params['LBName'],LbType=self.params['LBType'],LbIp=self.params['eips'],EipId=self.params['eip'],LbContNum=5000,LbsZone=self.Data['Zone'],LbsId='',LbsGroupId=0,LvsId=LvsId,LvsGroupId=LvsGroupId,LbPaymentType=0,LbPaymentDate=0,UserId=self.Data['UserId'])
+						inLb.save()
+						eipgroup.save()
+						return_data = {
+							'code' : 0,
+							'msg' : '您已提交成功，稍等片刻，8号就能为您服务了。',
+						}
+					else:
+						return_data = {
+							'code' : 1001,
+							'msg' : '创建失败，请您重新在多戳几次鼠标或联系客服妹子。',
+						}
+					
+				else:
+					print '暂时无法操作'
+					return_data = {
+						'code' : 1,
+						'msg' : '创建失败，请您重新在多戳几次鼠标或联系客服妹子。',
+					}
+			else:
+				print '不存在'
+			#查询Lbsinfo表
+			
+		else:
+			#用户类型==3 调用统一的NLB 直接插入数据
+			inLb = LbInfo(LbId=LbId,LbName=self.params['LBName'],LbType=self.params['LBType'],LbIp=self.params['eips'],EipId=self.params['eip'],LbContNum=5000,LbsZone=self.Data['Zone'],LbsId='',LbsGroupId=LbsGroupId,LbPaymentType=0,LbPaymentDate=0,UserId=self.Data['UserId'])
+			inLb.save()
+			eipgroup.save()
+			return_data = {
+				'code' : 0,
+				'msg' : '您已提交成功，稍等片刻，8号就能为您服务了。',
+			}
+		return_data = json.dumps(return_data)
+		return return_data
+	def CreateLbBackend(self):
+		BackendList = BackendInfo.objects.filter(LbMonitorId=self.params['LbUpstreamId']).filter(EchId=self.params['EchId']).filter(BackendPort=self.params['BackendPort'])
+		if BackendList:
+			code = 1
+			msg = '您提交的已提交，请修改后重新提交'
+		else:
+			#获取ECH IPAddress
+			EchList = EchInfo.objects.get(EchId=self.params['EchId'])
+			EchIp = EchList.EchIp
+			BackendPort = self.params['BackendPort']
+			BackendWeight = self.params['BackendWeight']
+			#获取LBMonitor domain,port,LbProtocol
+			LbMonitorList = LbMonitorInfo.objects.get(id=self.params['LbUpstreamId'])
+			LbDomain = LbMonitorList.LbDomain
+			UpstreamName = LbDomain.replace('.','')
+			listener_port = LbMonitorList.LbPort
+			LbProtocol = LbMonitorList.LbProtocol
+			#创建Backend
+			ServerBackend = """									server %s:%s weight=%s;\n""" % (EchIp,BackendPort,BackendWeight)
+			operateinfo = {
+				'action':'CreateLbBackend',
+				'parame':{
+					'FileName':UpstreamName+str(listener_port),
+					'ServerBackend':ServerBackend,
+				},							
+			}
+			LbDetails = LbInfo.objects.get(LbId=self.params['loadbalancerid'])
+			LbsList = LbsInfo.objects.filter(GroupId=LbDetails['LbsGroupId'])
+			if LbsList:
+				#获取负载集群状态
+				NLBHandleInfo = []
+				NLBStatus = 0
+				for LbsDetail in LbsList:
+					LbsHandleInfo = {
+						'LbsWeight' : LbsDetail['LbsWeight'],
+						'LbsIp' : LbsDetail['LbsIp'],
+					}
+					#获取相对主备ip
+					LBOperateOut = Operate(LbsDetail['LbsIp'],{'action':'NLBStatus'})
+					
+					NLBStatus = int(LBOperateOut)
+					
+					NLBHandleInfo.append(LbsHandleInfo)
+				if NLBStatus == 0:
+					for LbsDetail in LbsList:
+						LbsIp = LbsDetail.LbsIp
+						BackendOperateOut = Operate(LbsIp,operateinfo)
+						print BackendOperateOut
+						if BackendOperateOut == 'done':
+							BackendStatus = 1
+						else:
+							BackendStatus = 0
+					if BackendStatus == 1:
+						inBackend = BackendInfo(BackendName=self.params['BackendName'],BackendIp=EchIp,BackendPort=BackendPort,LbProtocol=LbProtocol,BackendWeight=BackendWeight,EchId=self.params['EchId'],LbMonitorId=self.params['LbUpstreamId'],LbId=self.params['loadbalancerid'])
+						inBackend.save()
+						code = 0
+						msg = '创建成功。'
+					else:
+						code = 0
+						msg = '暂时无法为您添加后端负载，请您稍后提交或联系客服。'
+			else:
+				code = 0
+				msg = '当前'
+		return_data = {
+			'code' : code,
+			'msg' : msg,
+		}
+		return_data = json.dumps(return_data)
+		return return_data								

@@ -18,11 +18,11 @@
     <div class="topRight">
         <ul>
             <li class="last hasSub" style="width:150px;">
-                <span id="userInfoId" title="lonesoul">lonesoul</span>
+                <span id="userInfoId" title="lonesoul">{{UserName}}</span>
                 <i class="menuIcon"></i>
                 <div class="topSub" style="width:150px;">
                     <a href="http://uc.xcloud.com">个人中心</a>
-                    <a id="logout_text" onclick="userInfo.ssoLogout();" href="javascript;">退出</a>
+                    <a id="logout_text" onclick="Logout();">退出</a>
                 </div>
             </li>
             <li id="subText" class="last hasSub hide" style="display:none">子账户</li>
@@ -36,4 +36,10 @@
             </li>
         </ul>
     </div>
+    <script>
+        function Logout(){
+            //$.get("/logout/",function(){});  
+            window.location.href="/logout/"
+        }
+    </script>
 </section>

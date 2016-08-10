@@ -15,12 +15,12 @@
         <div class="infoBox">
             <h4>基本信息</h4>
             <ul class="cl">
-                <li class="hide">I  D：<span id="contactId">1ef2d2fc-edf3-4ed2-a154-5d4266378644</span></li>
-                <li class="lwr-li-word-break">联系组名称：<span id="groupName">aaa</span></li>
-                <li>成员数：<span id="number">1</span></li>
-                <li>最新更新时间：2016/08/04 18:08:50</li>
-                 <input type="hidden" value="1ef2d2fc-edf3-4ed2-a154-5d4266378644" id="mid">
-                  <input type="hidden" _id="1ef2d2fc-edf3-4ed2-a154-5d4266378644" id="id">
+                <li class="hide">I  D：<span id="contactId">{{c_g_details.uuid}}</span></li>
+                <li class="lwr-li-word-break">联系组名称：<span id="groupName">{{c_g_details.Name}}</span></li>
+                <li>成员数：<span id="number">{{c_g_details.ContactNum}}</span></li>
+                <li>最新更新时间：{{c_g_details.CreateTime|date:"Y-m-d H:i:s"}}</li>
+                <input type="hidden" value="{{c_g_details.uuid}}" id="mid">
+                <input type="hidden" _id="{{c_g_details.uuid}}" id="id">
             </ul>
         </div>
 
@@ -35,7 +35,7 @@
         <div class="buildCon">
                               <div class="buildBox">
                         <dl class="detail-alerm">
-                            <dd class="fr"><a class="glBtn" onclick="addDetailPerson('1ef2d2fc-edf3-4ed2-a154-5d4266378644')" href="javascript:void(0)">新&emsp;增</a></dd>
+                            <dd class="fr"><a class="glBtn" onclick="addDetailPerson('{{c_g_details.uuid}}')" href="javascript:void(0)">新&emsp;增</a></dd>
                         </dl>
                         <div class="alermCon">
                         	<div style="border-left:0;" class="alermBox mb23">
@@ -58,21 +58,20 @@
                                     </tr>
                                 </thead>
                                 <tbody id="recordList">
-                                    <!--<tr id="msgTr" class=""><td colspan="5" style="text-align: center;">没有联系人</td></tr>-->
-                                    <tr _id="47f6e6c6-6834-45e1-bb10-4f143850f412" class="">
-                                        <td>lonesoul</td>
-                                        <td>18916696385</td>
-                                        <td>448765461@qq.com</td>
-                                        <td>2016-06-23 16:37:42</td>
-                                        <td><i onclick="detail.deleteGroupCon('47f6e6c6-6834-45e1-bb10-4f143850f412','','lonesoul')" title="删除" class="i16"></i></td>
-                                    </tr>
-                                    <tr _id="922d1fdf-9e7c-4b88-838c-c9dcbf177fb2" class="trGray">
-                                        <td>shengyuan</td>
-                                        <td>18916696328</td>
-                                        <td>4487654444@qq.com</td>
-                                        <td>2016-08-04 18:07:53</td>
-                                        <td><i onclick="detail.deleteGroupCon('922d1fdf-9e7c-4b88-838c-c9dcbf177fb2','','shengyuan')" title="删除" class="i16"></i></td>
-                                    </tr>
+                                    {% if clist|length > 0 %}
+                                        <!--<tr id="msgTr" class=""><td colspan="5" style="text-align: center;">没有联系人</td></tr>-->
+                                        {% for contact_details in clist%}
+                                        <tr _id="{{contact_details.uuid}}" class="">
+                                            <td>{{contact_details.Name}}</td>
+                                            <td>{{contact_details.Phone}}</td>
+                                            <td>{{contact_details.Email}}</td>
+                                            <td>{{contact_details.CreateTime|date:"Y-m-d H:i:s"}}</td>
+                                            <td><i onclick="deleteGroupCon('{{contact_details.uuid}}','{{contact_details.Name}}')" title="删除" class="i16"></i></td>
+                                        </tr>
+                                        {% endfor %}
+                                    {% else %}    
+                                        <tr id="msgTr" class=""><td colspan="5" style="text-align: center;">没有联系人</td>
+                                    {% endif %}
                                 </tbody>
                             </table>
                             </div>
@@ -88,4 +87,158 @@
 <div style="display:none;z-index:19891014; background-color:#000; opacity:0.3; filter:alpha(opacity=30);" times="1" id="layui-layer-shade1" class="layui-layer-shade"></div>
 </div>
 {% include "addContactDiv.html"%}
+{% include "deleteTipsDiv.html"%}
+<script>
+    function clearAlaMsg_new(divid){
+        $(divid+"_er").parent().removeClass("error");
+        $(divid+"_er").show()
+        $(divid+"_er").html("");
+        $(divid+"Tip").show();
+    }
+    function deleteGroupCon(cid,cname){
+        $("body").append('<div style="display:;z-index:19891014; background-color:#000; opacity:0.3; filter:alpha(opacity=30);" times="1" id="layui-layer-shade1" class="layui-layer-shade"></div>');
+        $("#deleteTipsDiv").show();
+        $("#delete_contacts_div").html("确认删除联系人："+cname+" ？");
+        $("#deleteTipsDiv #cid").html(cid);
+        /*
+        var cgroupsId = $("#contactId").html();
+        var params = {"action":"deleteContactToGroup","cid":cid,"cname":cname,"cgroupsId":cgroupsId}
+		ParamsToStr = JSON.stringify(params);
+        $.ajax({
+            type: "POST",
+            url: "/api/",
+            dataType: "json",
+            data: { method: "GET", 'action':'contact',params: ParamsToStr},
+            beforeSend: function(){
+            },			
+            success: function(json){
+                if(data['code']==0){
+                    window.location.href=".";
+                }else{
+                    alert(data['msg']);
+                }
+            }
+        });
+        */
+    }
+    function addDetailPerson(cgid){
+        $("body").append('<div style="display:;z-index:19891014; background-color:#000; opacity:0.3; filter:alpha(opacity=30);" times="1" id="layui-layer-shade1" class="layui-layer-shade"></div>');
+        $("#addContact").show();
+        //获取tr列表
+        /*
+        var clist = []
+        $("#recordList").find("tr").each(function(){
+            var cid = $(this).attr("_id");
+            clist.push(cid);        
+        });
+        */
+        var params = {"action":"addDetailPerson","cgid":cgid}
+		ParamsToStr = JSON.stringify(params);
+        $.ajax({
+            type: "POST",
+            url: "/api/",
+            dataType: "json",
+            data: { method: "GET", 'action':'contact',params: ParamsToStr},
+            beforeSend: function(){
+                //$('<div id="msg" />').addClass("loading").html("正在登录...").css("color","#999").appendTo('.sub');
+                //$("#yz").css("display","none");
+                //$('<div id="loading" />').html("<div class=\"load\">正在登录...<\/div>").appendTo('body');
+            },			
+            success: function(json){
+                if(json['code']==0){
+                    //判断是否存在联系人
+                    if(json['data'].length > 0){
+                        for(i=0;i < json['data'].length;i++){
+                            if (json['data'][i]["email"].length>15){
+                                var email = json['data'][i]["email"].substring(0,14) + '...';
+                            }else{
+                                var email = json['data'][i]["email"];
+                            }
+                            var c_tr = '<tr class="">';
+                                c_tr +='    <td>';
+                                c_tr +='       <i class="mc_chosen check" _phone="'+json['data'][i]["phone"]+'" _email="'+json['data'][i]["email"]+'" _name="'+json['data'][i]["name"]+'" _id="'+json['data'][i]["cid"]+'" id="mc_chosen"></i>';
+                                c_tr +='    </td>';
+                                c_tr +='    <td>'+json['data'][i]["name"]+'</td>';
+                                c_tr +='    <td>'+json['data'][i]["phone"]+'</td>';
+                                c_tr +='    <td title="'+json['data'][i]["email"]+'">'+email+'</td>';
+                                c_tr +='</tr>';
+                            if(i==(json['data'].length-1)){
+                                c_tr +='<script>$(function(){';
+                                c_tr +='    $(".mc_chosen").click(function(){';
+                                c_tr +='        if($(this).attr("class").length==15){$(this).addClass("checked");}else{$(this).removeClass("checked");}';
+                                c_tr +='            ';
+                                c_tr +='    });';
+                                c_tr +='});<\/script>';
+                            }
+                            $("#loadDataList").append(c_tr)
+                        }
+                    }else{
+                        $("#loadDataList").append('<tr id="msgTr" class=""><td colspan="5" style="text-align: center;">没有联系人</td></tr>');
+                    }
+                }
+            }
+        });               
+    }
+    $(function(){
+    
+        $("#loadDataList tr,#createAddPerson tr,#contactsList tr,#recordList tr").hover(function(){
+            $("#recordList tr").removeClass("trHover");
+            $(this).addClass("trHover");
+        });
+
+
+        $(".layui-layer-btn1,.layui-layer-close1").click(function(){
+            $("#layui-layer-shade1").remove();
+            if($("#addContact").css("display") == 'block'){
+                $("#addContact").hide();
+                $("#loadDataList").html('');
+                $("#layui-layer-shade1").remove();
+            }else{
+                $("#deleteTipsDiv").hide();
+                $("#layui-layer-shade1").remove();
+            }
+        });
+        $(".layui-layer-btn0").click(function(){
+            if ($("#addContact").css("display") == 'block'){
+                //获取tr列表
+                var clist = []
+                $("#loadDataList").find("i").each(function(){
+                    if($(this).attr("class").length==23){
+                        var cid = $(this).attr("_id");
+                        clist.push(cid); 
+                    }
+                });
+                var cgroupsId = $("#contactId").html();
+                var params = {"action":"addContactToGroup","cgroupsId":cgroupsId,"clist":clist}
+            }
+            if ($("#deleteTipsDiv").css("display") == 'block'){
+                var cgroupsId = $("#contactId").html();
+                var cid = $("#cid").html();
+                var params = {"action":"deleteContactToGroup","cid":cid,"cgroupsId":cgroupsId}
+            }
+
+			var ParamsToStr = JSON.stringify(params);
+            $.ajax({
+                type: "POST",
+                url: "/api/",
+                dataType: "json",
+                data: { method: "GET", 'action':'contact',params: ParamsToStr},
+                beforeSend: function(){
+                    //$('<div id="msg" />').addClass("loading").html("正在登录...").css("color","#999").appendTo('.sub');
+                    //$("#yz").css("display","none");
+                    //$('<div id="loading" />').html("<div class=\"load\">正在登录...<\/div>").appendTo('body');
+                },			
+                success: function(data){
+                    if(data['code']==0){
+                        window.location.reload();
+                        //$("#msg").remove();
+                        //$(".home-logo").after('<div id="msg"><div class="msgcon">您输入的用户名或密码错误</div></div>');
+                    }else{
+                        alert(data['msg']);
+                    }
+                }
+            });
+        });
+    })
+</script>
 {% endblock %}

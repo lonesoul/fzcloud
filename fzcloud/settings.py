@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'asset',
     'userman',
     'contact',
+    'account',
+    'api',
     #'ech',
     #'images',
     #'vpc',
@@ -65,12 +67,11 @@ INSTALLED_APPS = [
     #'home',
     #'ech',
     #'images',
-    #'api',
     #'region',
     #'keyproxy',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     #'django.middleware.common.CommonMiddleware',
@@ -147,7 +148,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+#USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)

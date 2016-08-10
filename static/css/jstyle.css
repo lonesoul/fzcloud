@@ -1,4 +1,4 @@
-/*@import url("//fonts.useso.com/css?family=Open+Sans:300,400,600,700&amp;lang=en");*/
+﻿/*@import url("//fonts.useso.com/css?family=Open+Sans:300,400,600,700&amp;lang=en");*/
 
 h1,
 h2,
@@ -426,7 +426,6 @@ body.fixed-sidebar.mini-navbar .navbar-default .nav li a span {
   color: #fff;
 }
 .btn-primary {
-  background-color: #1ab394;
   border-color: #1ab394;
   color: #FFFFFF;
 }
