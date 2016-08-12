@@ -6,137 +6,118 @@
         {{indextitcon}}
     </h2>
     <p>
-        您可以根据自己的需求自定义云主机的CPU，内存配置，加载或卸载云硬盘，并通过页面访问登陆
+        管理固有资产
     </p>    
 {%endblock%}
 {% block mainCon %}
 <div class="innerCon">
     <div class="conBox">
         <div class="innerBox">
-            <div class="btnDiv">
-                <div class="searchBox hide"></div>
-                <a id="refresh" class="refresh" href="#">
-                    <i class="i17"> </i>
-                </a>
-                <a id="batch" class="whiteBtn mr5" href="">
-                批量操作
-                </a>
-                <a id="showCreate" class="greenBtn" href="javascript:void(0);">创&emsp;建</a>
-            <div>
-            <table class="listTable">
-                <colgroup>
-                    <col width="4%" class="batch" style="display;">
-                    <col width="14%">
-                    <col width="14%">
-                    <col width="11%">
-                    <col width="11%">
-                    <col width="8%">
-                    <col width="8%">
-                    <col width="13%">
-                </colgroup>
-                <thead>
-                    <tr class="trGray">
-                        <th class="batch" style="display:">
-                            <input class="" type="checkbox" />
-                        </th>
-                        <th>
-                            用户名
-                        </th>
-                        <th>
-                            姓名
-                        </th>
-                        <th>
-                            小组
-                        </th>
-                        <th>
-                            权限
-                        </th>
-                        <th>
-                            主机数量
-                        </th>
-                        <th>
-                            <div class="filter">
-                                状态
-                                <i class="arr"> </i>
-                                <ul class="filterDrop">
-                                    <li id="conShowAll">全 部</li>
-                                    <li id="conShowActive">运 行</li>
-                                    <li id="conShowStop">停 止</li>
-                                    <li id="conShowError">错 误</li>
-                                </ul>
+            <div id="con-contact-1" class="buildCon">
+
+                <div class="buildBox grayBg">
+                	<div class="whiteBox">
+                    	<div class="btnDiv">
+                    	<!--
+                        	<div class="searchBox">
+                            	<input type="text" class="searchInput" placeholder="请输名称进行搜索" ><a href="javascript:void(0);" class="searchBtn"><i class="i31"></i></a>
                             </div>
-                        </th>
-                        <th>
-                            操作
-                        </th>
-                    </tr>
-                </thead>
-            </table>
-            <div id="list">
-                <table class="listTable">
-                    <colgroup>
-                        <col width="4%" class="batch" style="display: ;">
-                        <col width="14%">
-                        <col width="14%">
-                        <col width="11%">
-                        <col width="11%">
-                        <col width="8%">
-                        <col width="8%">
-                        <col width="13%">
-                    </colgroup>
-                    <tbody>
-                    
-                        <tr id="recordList" class="" style="display:none"> 
-                            <td colspan="8">无云主机数据</td>
-                        </tr>
-                        {%for user_d in user_list%}
-                        <tr class="" id="">
-                            <td style="display: ;" class="">
-                                
-                                <input type="checkbox" class="">
-                            </td>
-                            <td>
-                                <a href="/user/details?id={{user_d.uuid}}" title="{{user_d.UserName}}" id="containerName" class="serverName">
-                                    {{user_d.UserName}}
-                                </a>
-                            </td>
-                            <td>
-                                {{user_d.Name}}
-                            </td>
-                            <td>
-                                {% if user_d.Groups%}{{user_d.Groups}}{% else%}-{%endif%}
-                            </td>
-                            <td>
-                                {%ifequal user_d.Power 0%}超级管理员{%endifequal%}
-                                {%ifequal user_d.Power 1%}管理员{%endifequal%}
-                                {%ifequal user_d.Power 2%}普通用户{%endifequal%}
-                            </td>
-                            <td>
-                                1
-                            </td>                            
-                            <td>
-                                {%ifequal user_d.Status 1%}
-                                <span _state="-" _status="{{user_d.Status}}" class="green" id="status">
-                                    <span class="green">
-                                    <i class="greenPoint"></i>
-                                    启用
-                                    </span>
-                                </span>
-                                {%endifequal%}
-                            </td>
-                            <td><i  title="修改" class="i47"></i><i title="删除" id="deleteButton" class="i16"></i></td>
-                            <!--
-                            
-                            <td _uid="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" _id="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" id="cpuProgress">-</td>
-                            <td _uid="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" _id="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" id="memoryProgress">-</td>
-                            <td _type="" _uid="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" _id="8a53fa41-b3d4-4c5d-935b-ebe6b526b26b" id="containerPriceType">-</td>
-                            
-                            <td><i title="启动" id="startButton" class="i11 i111"></i><i title="停止" id="stopButton" class="i12" style="display: none;"></i><i title="仅运行状态的云主机可以重启" id="restartButton" class="i13 i113"></i><i id="backupIcon" title="镜像资源限额已满，无法备份" style="display: none" class="backupIconUn"></i><i title="镜像资源限额已满，无法制作镜像" id="createImage" class="i14 creat-jx i114"></i><i title="绑定公网IP" id="bindPublicIp" class="i15 i115"></i><i title="删除" id="deleteButton" class="i16"></i></td>
                             -->
-                        </tr>
-                        {%endfor%}
-                    </tbody>
-                </table>
+                        	<a class="refresh" id="refresh" href="javascript:void(0);"><i class="i17"></i></a>
+                       		<a id="batch" class="whiteBtn mr5 " href="javascript:void(0);">批量操作</a>
+                        	<a id="showCreate" class="greenBtn" href="javascript:void(0);">创&emsp;建</a>
+                        </div>
+                        <!-- 表头 -->
+
+                    	<table class="listTable">
+                        	<colgroup>
+                            	<col width="4%" class="batch hide" style="display: none;">
+                            	<col width="13%">
+                            	<col width="13%">
+                            	<col width="10%">
+                            	<col width="10%">
+                                <col width="10%">
+                                <col width="10%">
+                                <col width="10%">
+                                <col width="20%">
+                            </colgroup>
+                        	<thead>
+                            	<tr class="tcenter trGray">
+                                	<th id="selectAll2" class="batch hide" style="display: none;"><i class="check"></i><input type="checkbox" class="hide"></th>
+                                	<th>主机名</th>
+                                	<th>IP地址</th>
+                                	<th>所属主机组</th>
+                                    <th>操作系统</th>
+                                    <th>cpu核数</th>
+                                	<th>内存</th>
+                                    <th>硬盘</th>
+                                	<th>操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                    <div id="list">
+                    <table id="listTableList" class="listTable">
+                        <colgroup>
+                            <col width="4%" class="batch hide" style="display: none;">
+                            <col width="13%">
+                            <col width="13%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="20%">
+                        </colgroup>
+                    	<tbody id="recordList">
+                            {% for assets in asset_list%}
+                                
+                            <tr _name="{{assets.HostName}}" _id="{{assets.uuid}}" id="listTr" class="">
+                                <td class="batch" style="display: none;">
+                                <i name="{{assets.HostName}}" id="{{assets.uuid}}" class="check">
+                                </i><input type="check" class="hide">
+                                </td>
+                                <td>{{assets.HostName}}</td>
+                                <td>{{assets.HostIp}}</td>
+                                <td>{% if assets.GroupId%}{{assets.GroupName}}{% else%}-{%endif%}</td>
+                                <td>{{assets.SystemType}} {{assets.SystemVersion}}</td>
+                                <td>{% if assets.CPU%}{{assets.CPU}} 核{% else%}-{%endif%}</td>
+                                <td>{% if assets.MEM%}{{assets.MEM}} (G){% else%}-{%endif%}</td>
+                                <td>{% if assets.Disk%}{{assets.Disk}} (G){% else%}-{%endif%}</td>
+                                <td>    
+                                    <i id="updatePerson" _hostname="{{assets.HostName}}" _hostip="{{assets.HostIp}}" 
+                                            _otherip="{{assets.OtherIp}}"
+                                            _mac="{{assets.MAC}}"
+                                            _manageaccount="{{assets.ManageAccount}}" 
+                                            _port ="{{assets.Port}}" 
+                                            _groupid ="{{assets.GroupId}}" 
+                                            _cpu ="{{assets.CPU}}" 
+                                            _mem ="{{assets.MEM}}" 
+                                            _disk ="{{assets.Disk}}" 
+                                            _systemyype ="{{assets.SystemType}}" 
+                                            _systemversion ="{{assets.SystemVersion}}"
+                                            _hosttype ="{{assets.HostType}}" 
+                                            _operatenv ="{{assets.OperatEnv}}" 
+                                            _hoststatus ="{{assets.HostStatus}}"
+                                            _status ="{{assets.Status}}"
+                                            _id="{{assets.uuid}}" title="修改" class="i47 updatePerson"></i>
+                                    <i id="deletePerson" _name="{{assets.HostName}}" _id="{{assets.uuid}}" title="删除" class="i16 deletePerson"></i>
+                                    <!--<i id="updatePerson" _email="{{contacts.Email}}" _phone="{{contacts.Phone}}" _name="{{contacts.Name}}" _id="{{contacts.uuid}}" title="默认联系人不允许修改" class="i47 i147"></i>-->
+                                    <!--<i _name="{{contacts.Name}}" _id="{{contacts.uuid}}" title="删除" onclick="showDeleteTip('默认联系人不允许删除！')" class="i16"></i>-->
+                                </td>
+                            </tr>
+                            {% endfor %} 
+                        </tbody>
+                    </table>
+                     </div>
+                    </div>
+                    <div class="botDiv hide" style="display: none;">
+                    	<span id="selectAll" class="checkDiv"><i class="check"></i></span><a id="deleteAll" title="请选择要删除的联系人" class="wsBtn gsBtn mr5 grayBtn" href="javascript:void(0);">删&ensp;除</a>
+                    </div>
+                </div>
+            	<!-- 分页begin -->
+                <div id="conPagination" class="pages" _size="10" _min="0" _max="0" _cur="0" style="display: none;"><a _page="0" href="javascript:;" class="prev" id="prev">上一页</a><span class="current" _page="0" href="javascript:;" id="num">1</span><span class="current" _page="0" href="javascript:;" id="num">1</span><a _page="0" href="javascript:;" class="next" id="next">下一页</a></div>
+                <!-- 分页end -->
             </div>
         </div>
         <div class="botDiv" style="display:none">
@@ -161,8 +142,11 @@
 
     <div id="publicPagination" class="pages"> </div>
 </div>
-{% include "addUserPersonDiv.html"%}
-
+{% include "addAssetPersonDiv.html"%}
+{% include "newGroupDiv.html"%}
+{% include "addContactDiv.html"%}
+{% include "updateAssetPersonDiv.html"%}
+{% include "deleteTipsDiv.html"%}
 </div>
 <script>
     function clearAlaMsg_new(divid){
@@ -216,34 +200,35 @@
         })
         $("#showCreate").click(function(){
             $("body").append('<div style="display:;z-index:19891014; background-color:#000; opacity:0.3; filter:alpha(opacity=30);" times="1" id="layui-layer-shade1" class="layui-layer-shade"></div>');
-            $("#addPerson").show();
+            $("#addAssetPerson").show();
         });
         $(".layui-layer-btn1,.layui-layer-close1").click(function(){
             $("#updateAssetPersonDiv").hide();
-            $("#addPerson").hide();
+            $("#addAssetPerson").hide();
             $("#deleteTipsDiv").hide();
             $("#layui-layer-shade1").remove();
             
         });
         $(".layui-layer-btn0").click(function(){
             
-            if($("#addPerson").css("display") == 'block'){
-                var username = $("#username").val();
-                var name = $("#name").val();
-                var email = $("#email").val();
+            if($("#addAssetPerson").css("display") == 'block'){
+                var hostname = $("#hostname").val();
+                var hostip = $("#hostip").val();
+                var port = $("#port").val();
                 var status = 1;
-                var power = 2;
-                $(".power").each(function(){
-                    if($(this).attr("checked")){
-                        power = $(this).attr("_power");
-                    }
-                });
+                if($("#addAssetPerson #mc_chosen").attr("class").length==23){
+                    manageuser = 0;
+                }else{
+                    var manageu = $("#manageuser").val();
+                    var managepasswd = $("#managepasswd").val();
+                    manageuser = [manageu,managepasswd];
+                }
                 $(".status").each(function(){
                     if($(this).attr("checked")){
                         status = $(this).attr("_status");
                     }
                 });
-                var params = {"action":"addPerson","username":username,"name":name,"email":email,"status":status,"power":power,}
+                var params = {"action":"addPerson","hostname":hostname,"hostip":hostip,"port":port,"manageuser":manageuser,"status":status,}
                 
                 //var add_up = 1;
             }
@@ -353,7 +338,7 @@
                 type: "POST",
                 url: "/api/",
                 dataType: "json",
-                data: { method: "GET", 'action':'userman',params: ParamsToStr},
+                data: { method: "GET", 'action':'asset',params: ParamsToStr},
                 beforeSend: function(){
                     //$('<div id="msg" />').addClass("loading").html("正在登录...").css("color","#999").appendTo('.sub');
                     //$("#yz").css("display","none");

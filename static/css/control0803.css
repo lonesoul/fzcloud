@@ -338,6 +338,28 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder{color:#ccc;}
 .w280{width:280px;}
 .w40{width:40px;}
 .w390{width:390px;}
+.w380{width:380px;}
+.w180{width:180px;}
+.w360{width:360px;}
+.select-con {
+display: inline-block;
+overflow: hidden;
+vertical-align: middle;
+margin: 0 10px 0 0;
+position: relative;
+height: 31px;
+border: 2px solid #cbcad8;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+background-image: -webkit-linear-gradient(top,#fff,#ebebeb);
+background-image: -moz-linear-gradient(top,#fff,#ebebeb);
+background-image: -o-linear-gradient(top,#fff,#ebebeb);
+background-image: linear-gradient(to bottom,#fff,#ebebeb);
+-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.08);
+-moz-box-shadow: 0 1px 1px rgba(0,0,0,.08);
+box-shadow: 0 1px 1px rgba(0,0,0,.08);
+}
 .inputName{width:80px;height:18px;line-height:18px;border:1px solid #dbe3e9;color:#666;border-radius:3px;padding:0 2px;margin:0 3px;}
 .inputName:focus{border-color:#2aafff;box-shadow: 0 0 5px #ace0ff;}
 .select-box{position:relative;}
@@ -390,7 +412,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder{color:#ccc;}
 .monitorTab{height:30px;}
 .monitorTab li{width:88px;height:30px;line-height:30px;text-align:center;color:#666;cursor:pointer;float:left;}
 .monitorTab li.current{background:#51d2b7;color:#fff;border-radius:3px;}
-.newBranch .listItem .tit{width:60px;} /*为加'*'增加宽度 by 袁昌龙 2016-05-25*/
+.newBranch .listItem .tit{width:70px;} /*为加'*'增加宽度 by 袁昌龙 2016-05-25*/
 .newBranch .listItem .con,.newBranch .tips{padding-left:60px;} /*同上*/
 .addDiv{width:240px;margin:0 auto;}
 .addDiv .dropdown-btn{width:178px;}

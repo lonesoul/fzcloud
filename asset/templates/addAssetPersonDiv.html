@@ -1,0 +1,69 @@
+<div id="addAssetPerson" style="display:none;z-index: 19891023; width: 510px; top: 20.5px; left: 695.5px;" contype="object" showtime="0" times="9" type="page" id="layui-layer9" class="layui-layer layui-anim layui-layer-page layer-ext-moon">
+<div style="cursor: move;" class="layui-layer-title" move="ok">新增资产</div>
+<div class="layui-layer-content">
+<div style="display: block;" class="popup addAssetPerson layui-layer-wrap">
+    <div class="newBranch">
+    	<ul class="listItem">
+        	<li class="first">
+                <p class="tit"><span class="red">* </span>主机名：</p>
+                <p class="con">
+                    <input type="text" class="inputMode w380" onfocus="clearAlaMsg_new('#hostname')" id="hostname"></p>
+                <p id="name_er" class="tips" style="display: none;"></p>
+                <p></p>
+                <p class="tips" id="nameTip">不为空，只支持中文、数字、大小写字母、英文下划线“_”及中划线“-”，且不能超过32字符</p></li>
+			<li>
+                <p class="tit">
+                    <span class="red">* </span>主机IP：</p>
+                <p class="con">
+                    <input type="text" class="inputMode w380" onfocus="clearAlaMsg_new('#hostip')" id="hostip">
+                </p>
+                <p id="phone_er" class="tips" style="display: none;"></p>
+                <p></p>
+                <p class="tips" id="phoneTip">如果IP地址不填写, IP默认会设置与主机名一致</p>
+            </li>
+        	<li>
+                <p class="tit"><span class="red">* </span>管理用户：</p>
+                <p class="con">
+                    <i class="mc_chosen check checked" id="mc_chosen"></i>
+                    使用默认 
+                </p>
+                <p id="email_er" class="tips" style="display: none;"></p>
+                <p></p>
+                <p class="tips" id="emailTip">管理用户是服务器存在的root或拥有sudo的用户，用来推送系统用户</p>
+                <p class="con" style="display:none;">
+                    <input type="text" placeholder="user" class="inputMode w180" onfocus="clearAlaMsg_new('#manageuser')" id="manageuser">
+                    /
+                    <input type="password" placeholder="password" class="inputMode w180" onfocus="clearAlaMsg_new('#managepasswd')" id="managepasswd">
+                </p>
+            </li>
+			<li>
+                <p class="tit">
+                    <span class="red">* </span>端口：</p>
+                <p class="con">
+                    <input type="text" class="inputMode w380" onfocus="clearAlaMsg_new('#port')" id="port">
+                </p>
+                <p id="phone_er" class="tips" style="display: none;"></p>
+                <p></p>
+                <p class="tips" id="phoneTip">端口号不能为空</p>
+            </li>
+			<li>
+                <p class="tit">
+                    <span class="red">* </span>是否激活：</p>
+                <p class="con" style="line-height:38px">
+                    
+                    <input type="radio" class="inputMode w40 status" onfocus="clearAlaMsg_new('#status')" style="float:left" name="is_active" _status="1" id="status" checked="checked">
+                    <span style="line-height:38px;height:38px;display: block;width: 40px;float:left;">激活</span>
+                    <input type="radio" class="inputMode w40 status" onfocus="clearAlaMsg_new('#status')"  style="float:left"  name="is_active" _status="0" id="status">
+                    <span style="line-height:38px;height:38px;display: block;width: 40px;float:left;">禁用</span>
+                </p>
+                <p id="phone_er" class="tips" style="display: none;"></p>
+                <p></p>
+                <p class="tips" id="phoneTip"></p>
+            </li>
+		</ul>
+	</div>
+</div>
+</div>
+<span class="layui-layer-setwin">
+<a href="javascript:;" class="layui-layer-ico layui-layer-close layui-layer-close1">
+</a></span><div class="layui-layer-btn"><a class="layui-layer-btn0">确定</a><a class="layui-layer-btn1">取消</a></div></div>

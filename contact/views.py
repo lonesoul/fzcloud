@@ -45,7 +45,6 @@ def cgdetails(request,details):
     c_g_list = c_group.objects.filter(C_Groupid=c_g_details.uuid)
     clist = []
     for cg_details in c_g_list:
-        print cg_details.Contactid
         c_details = contacts.objects.filter(uuid=cg_details.Contactid).first()
         cdict = {
             "uuid" : c_details.uuid,
@@ -55,6 +54,5 @@ def cgdetails(request,details):
             "CreateTime" : c_details.CreateTime
         }
         clist.append(cdict)
-    print clist
     return render_to_response('cgdetails.html',locals())
     

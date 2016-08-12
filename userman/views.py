@@ -4,7 +4,7 @@
 from django.http import HttpResponse, HttpResponseRedirect, StreamingHttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from api.models import contacts,cgroups,c_group
+from api.models import contacts,cgroups,c_group,users
 import md5
 import datetime
 import StringIO
@@ -21,6 +21,7 @@ from decorator.response import validate_login_status
 def user(request):
     indextitcon = "用   户"
     type = "user"
+    user_list = users.objects.all()
     return render_to_response('user.html',locals())
     
     #return render_to_response('instance.html',locals(),context_instance=RequestContext(request))

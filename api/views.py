@@ -18,13 +18,23 @@ def index(request):
             params = json.loads(params)
             if method == 'GET':
                     return_data = {"code":10000,"msg":""}
-                    
+                    if request.POST['action'] == 'userman':
+                        from Xclass.UsermanClass import UsermanHandle
+                        Data= {
+                            "Uid":request.session.get('Uid')
+                        }
+                        return_data = UsermanHandle(params,Data).Person()                      
+                    if request.POST['action'] == 'asset':
+                        from Xclass.AssetClass import AssetHandle
+                        Data= {
+                            "Uid":request.session.get('Uid')
+                        }
+                        return_data = AssetHandle(params,Data).Person()                    
                     if request.POST['action'] == 'contact':
                         from Xclass.ContactClass import ContactHandle
                         Data= {
                             "Uid":request.session.get('Uid')
                         }
-                        print Data
                         return_data = ContactHandle(params,Data).Person()
                     if request.POST['action'] == 'login':
                         from Xclass.XloginClass import LoginHandle

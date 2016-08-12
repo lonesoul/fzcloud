@@ -15,7 +15,6 @@ class ContactHandle(object):
         self.Data = Data
         self.return_data = {}
     def Person(self):
-        return_data = {}
         if self.parame['action'] == 'addPerson':self._addPerson()
         elif self.parame['action'] == 'updatePerson':self._updatePerson()
         elif self.parame['action'] == 'deletePerson':self._deletePerson()

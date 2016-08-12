@@ -34,7 +34,6 @@ urlpatterns = [
     
     url(r'^asset/$','asset.views.asset'),
     url(r'^assetgroup/$','asset.views.assetgroup'),
-    url(r'^assetgroup/([^/]+)$','asset.views.agdetails'),
     
     url(r'^user/$','userman.views.user'),
     url(r'^user/([^/]+)$','userman.views.udetails'),    
